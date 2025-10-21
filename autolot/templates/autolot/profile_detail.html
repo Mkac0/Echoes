@@ -6,15 +6,13 @@
     {% if object.avatar %}
         <img src="{{ object.avatar.url }}" alt="Avatar" style="max-width:120px;border-radius:8px;">
     {% endif %}
-    <p><strong>Display name:</strong> {{ object.display_name }}</p>
+    <p><strong>Name:</strong> {{ object.name }}</p>
     <p><strong>Dealership:</strong> {{ object.dealership_name }}</p>
-    <p><strong>Phone:</strong> {{ object.phone }}</p>
     <p><strong>Bio:</strong> {{ object.bio|linebreaksbr }}</p>
-
     <hr>
     <p><strong>Account:</strong> {{ request.user.first_name }} {{ request.user.last_name }} — {{ request.user.email }}</p>
-
     <p><a href="{% url 'profile-edit' %}">Edit Profile</a></p>
 </div>
 
 {% endblock %}
+

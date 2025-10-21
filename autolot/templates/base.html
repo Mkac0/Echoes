@@ -23,6 +23,8 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'car-list' %}">Inventory</a></li>
                     <li><a href="{% url 'car-create' %}">Add Car</a></li>
+                    <li><a href="{% url 'profile-detail' %}">Profile</a></li>
+                    <li>Hello, {{ user.first_name|default:user.username }}!</li>
                     <li>
                         <form id="logout-form" method="post" action="{% url 'logout' %}">
                             {% csrf_token %}

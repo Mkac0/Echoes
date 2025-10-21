@@ -35,12 +35,25 @@ class ProfileEdit(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user.profile
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.method == 'POST':
+            context['user_form'] = UserAccountForm(self.request.POST, instance=self.request.user)
+        else:
+            context['user_form'] = UserAccountForm(instance=self.request.user)
+        return context
+    
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         user_form = UserAccountForm(request.POST, instance=request.user)
         form = self.get_form()
-        user_form.save()
-        return self.form_valid(form)
+        if form.is_valid() and user_form.is_valid():
+            user_form.save()
+            return self.form_valid(form)
+
+        context = self.get_context_data(form=form)
+        context['user_form'] = user_form
+        return self.render_to_response(context)
 
 class CarList(ListView):
     model = Car

@@ -17,4 +17,4 @@ def fetch_retail_photo_urls_by_vin(vin):
     response = requests.get(f"{BASE_API}/photos/{vin}", headers=headers)
     response.raise_for_status()
     data = response.json()
-    return (data.get("data") or {}).get("retail", [])
+    return (data.get('data') or {}).get('retail', [])

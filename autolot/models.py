@@ -2,12 +2,22 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
+def avatar_upload_to(instance, filename):
+    return f'avatars/user_{instance.user_id}/{filename}'
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    name = models.CharField(max_length=100, blank=True)
+    dealership_name = models.CharField(max_length=120, blank=True)
+    bio = models.TextField(blank=True)
+    avatar = models.ImageField(upload_to=avatar_upload_to, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.name or self.user.get_username()
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('profile-detail')
 
 class Car(models.Model):
     class Status(models.TextChoices):
@@ -15,6 +25,7 @@ class Car(models.Model):
         PENDING = 'pending', 'Pending'
         SOLD = 'sold', 'Sold'
     
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
     make = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
     trim = models.CharField(max_length=50, blank=True)

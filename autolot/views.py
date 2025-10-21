@@ -1,5 +1,4 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.db.models import Q
 from .models import Car, User, CarPhoto
@@ -14,17 +13,42 @@ import requests
 from django.contrib import messages
 from django.core.files.base import ContentFile
 from .services import fetch_retail_photo_urls_by_vin
+from .models import Profile
+from .forms import ProfileForm, UserAccountForm
 
 class Home(LoginView):
     template_name = 'home.html'
 
+class ProfileDetail(LoginRequiredMixin, DetailView):
+    model = Profile
+    template_name = 'autolot/profile_detail.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+    
+class ProfileEdit(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = 'autolot/profile_form.html'
+    success_url = reverse_lazy('profile-detail')
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        user_form = UserAccountForm(request.POST, instance=request.user)
+        form = self.get_form()
+        user_form.save()
+        return self.form_valid(form)
+
 class CarList(ListView):
     model = Car
-    template_name = "autolot/car_list.html"
+    template_name = 'autolot/car_list.html'
     def get_queryset(self):
         qs = super().get_queryset()
-        q = self.request.GET.get("q")
-        status = self.request.GET.get("status")
+        q = self.request.GET.get('q')
+        status = self.request.GET.get('status')
 
         if q:
             qs = qs.filter(Q(make__icontains=q) | Q(model__icontains=q) | Q(vin__icontains=q))
@@ -34,22 +58,29 @@ class CarList(ListView):
 
 class CarDetail(DetailView):
     model = Car
-    template_name = "autolot/car_detail.html"
+    template_name = 'autolot/car_detail.html'
 
 class CarCreate(LoginRequiredMixin, CreateView):
     model = Car
     form_class = CarForm
-    template_name = "autolot/form.html"
-    success_url = reverse_lazy("car-list")
+    template_name = 'autolot/form.html'
+    success_url = reverse_lazy('car-list')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.owner = self.request.user
+        self.object.save()
+        return redirect(self.get_success_url())
 
 class CarUpdate(UpdateView):
     model = Car
     form_class = CarForm
-    success_url = reverse_lazy("car-list")
+    template_name = "autolot/form.html"
+    success_url = reverse_lazy('car-list')
 
 class CarDelete(DeleteView):
     model = Car
-    success_url = reverse_lazy("car-list")
+    success_url = reverse_lazy('car-list')
 
 class UserList(ListView):
     model = User
@@ -58,49 +89,49 @@ class UserList(ListView):
 class UserCreate(LoginRequiredMixin, CreateView):
     model = User
     form_class = UserForm
-    success_url = reverse_lazy("user-list")
+    success_url = reverse_lazy('user-list')
 
 class UserUpdate(UpdateView):
     model = User
     form_class = UserForm
-    success_url = reverse_lazy("user-list")
+    success_url = reverse_lazy('user-list')
 
 class UserDelete(DeleteView):
     model = User
-    success_url = reverse_lazy("user-list")
+    success_url = reverse_lazy('user-list')
 
 class CarPhotoCreate(CreateView):
     model = CarPhoto
     form_class = CarPhotoForm
 
     def form_valid(self, form):
-        form.instance.car_id = self.kwargs["pk"]
+        form.instance.car_id = self.kwargs['pk']
         return super().form_valid(form)
     
     def post(self, request, *args, **kwargs):
-        if request.POST.get("import_api") == "1":
-            car = Car.objects.get(pk=self.kwargs["pk"])
+        if request.POST.get('import_api') == '1':
+            car = Car.objects.get(pk=self.kwargs['pk'])
             try:
                 urls = fetch_retail_photo_urls_by_vin(car.vin)
                 if not urls:
-                    messages.error(request, "No retail photo.")
-                    return redirect("car-detail", pk=car.pk)
+                    messages.error(request, 'No photo available.')
+                    return redirect('car-detail', pk=car.pk)
 
                 u = urls[0]
                 resp = requests.get(u, timeout=15)
                 resp.raise_for_status()
-                filename = (u.split("/")[-1].split("?")[0]) or f"{car.vin}.jpg"
+                filename = (u.split('/')[-1].split('?')[0]) or f"{car.vin}.jpg"
 
                 photo = CarPhoto(car=car)
                 photo.image.save(filename, ContentFile(resp.content), save=True)
-                messages.success(request, "Imported default.")
+                messages.success(request, 'Imported default.')
             except Exception as e:
                 messages.error(request, f"Import failed: {e}")
-            return redirect("car-detail", pk=car.pk)
+            return redirect('car-detail', pk=car.pk)
         return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse_lazy("car-detail", args=[self.kwargs["pk"]])
+        return reverse_lazy('car-detail', args=[self.kwargs["pk"]])
     
 def signup(request):
     error_message = ''

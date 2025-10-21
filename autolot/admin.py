@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Car, CarPhoto, User
+from .models import Car, CarPhoto, User, Profile
 
 class CarPhotoInLine(admin.TabularInline):
     model = CarPhoto
@@ -17,3 +17,8 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'status', 'interested_in')
     list_filter = ('status',)
     search_fields = ('first_name', 'last_name', 'email')
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'name', 'dealership_name')
+    search_fields = ('user_username', 'display_name', 'dealership_name')

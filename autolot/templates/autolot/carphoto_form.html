@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add Photo</h1>
+
+<h3>Upload from your computer</h3>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+    <a href="{% url 'car-detail' view.kwargs.pk %}">Cancel</a>
+</form>
+<hr>
+<h3>Or import from VIN (Auto.dev)</h3>
+<p>This will fetch the first “retail” photo for this car's VIN.</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="import_api" value="1">Import Photo from API</button>
+</form>
+{% endblock %}

@@ -3,6 +3,7 @@ from .models import Car, CarPhoto, User
 from .services import fetch_vehicle_by_vin
 
 class CarForm(forms.ModelForm):
+    auto_import_photo = forms.BooleanField(required=False, initial=True, label='Auto-import first photo from VIN AP')
     class Meta:
         model = Car
         fields = ['make', 'model', 'trim', 'year', 'vin', 'mileage', 'price', 'condition', 'status']

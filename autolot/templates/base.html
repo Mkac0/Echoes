@@ -23,7 +23,6 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'car-list' %}">Inventory</a></li>
                     <li><a href="{% url 'car-create' %}">Add Car</a></li>
-                    <li><a href="{% url 'logout' %}">Log out</a></li>
                     <li>
                         <form id="logout-form" method="post" action="{% url 'logout' %}">
                             {% csrf_token %}

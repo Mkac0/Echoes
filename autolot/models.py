@@ -31,7 +31,7 @@ class Car(models.Model):
 class CarPhoto(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="photos")
     image = models.ImageField(upload_to="cars/")
-    caption = models.CharField(max_length=120, blank=True)
+    caption = models.CharField(max_length=120, blank=True, null=True)
 
 class User(models.Model):
     class UserStatus(models.TextChoices):

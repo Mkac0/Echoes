@@ -10,10 +10,10 @@
     <a href="{% url 'car-detail' view.kwargs.pk %}">Cancel</a>
 </form>
 <hr>
-<h3>Or import from VIN (Auto.dev)</h3>
-<p>This will fetch the first “retail” photo for this car's VIN.</p>
+<h3>Or import default</h3>
 <form method="post">
     {% csrf_token %}
-    <button type="submit" name="import_api" value="1">Import Photo from API</button>
+    <input type="hidden" name="import_api" value="1">
+    <button type="submit">Import</button>
 </form>
 {% endblock %}

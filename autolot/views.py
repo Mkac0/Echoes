@@ -10,6 +10,10 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import requests
+from django.contrib import messages
+from django.core.files.base import ContentFile
+from .services import fetch_retail_photo_urls_by_vin
 
 class Home(LoginView):
     template_name = 'home.html'
@@ -73,8 +77,30 @@ class CarPhotoCreate(CreateView):
         form.instance.car_id = self.kwargs["pk"]
         return super().form_valid(form)
     
+    def post(self, request, *args, **kwargs):
+        if request.POST.get("import_api") == "1":
+            car = Car.objects.get(pk=self.kwargs["pk"])
+            try:
+                urls = fetch_retail_photo_urls_by_vin(car.vin)
+                if not urls:
+                    messages.error(request, "No retail photo.")
+                    return redirect("car-detail", pk=car.pk)
+
+                u = urls[0]
+                resp = requests.get(u, timeout=15)
+                resp.raise_for_status()
+                filename = (u.split("/")[-1].split("?")[0]) or f"{car.vin}.jpg"
+
+                photo = CarPhoto(car=car)
+                photo.image.save(filename, ContentFile(resp.content), save=True)
+                messages.success(request, "Imported default.")
+            except Exception as e:
+                messages.error(request, f"Import failed: {e}")
+            return redirect("car-detail", pk=car.pk)
+        return super().post(request, *args, **kwargs)
+
     def get_success_url(self):
-        return self.object.car.get_absolute_url() if hasattr(self.object.car, "get_absolute_url") else reverse_lazy("car-detail", args=[self.object.car_id])
+        return reverse_lazy("car-detail", args=[self.kwargs["pk"]])
     
 def signup(request):
     error_message = ''

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>{{ object.year }} {{ object.make }} {{ object.model }}</h2>
+<p>VIN: {{ object.vin }} — Mileage: {{ object.mileage }} — ${{ object.price }} — {{ object.condition }}</p>
+<p>Status: {{ object.get_status_display }}</p>
+<a href="{% url 'car-update' object.pk %}">Edit</a>
+<a href="{% url 'car-delete' object.pk %}">Delete</a>
+
+<h3>Photos</h3>
+<ul>
+    {% for p in object.photos.all %}
+        <li><img src="{{ p.image.url }}" style="max-width:200px;"> {{ p.caption }}</li>
+    {% empty %}
+        <li>No photos yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'carphoto-create' object.pk %}">Upload Photo</a>
+
+{% endblock %}

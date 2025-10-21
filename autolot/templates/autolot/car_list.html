@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Inventory</h1>
+<form method="get">
+    <input type="text" name="q" placeholder="Search make/model/VIN" value="{{ request.GET.q }}">
+    <select name="status">
+        <option value="">Any status</option>
+        {% for key,label in object_list.model.Status.choices %}
+        <option value="{{ key }}" {% if request.GET.status == key %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+    </form>
+
+    <a href="{% url 'car-create' %}">Add Car</a>
+    <ul>
+    {% for car in object_list %}
+        <li>
+        <a href="{% url 'car-detail' car.pk %}">{{ car.year }} {{ car.make }} {{ car.model }}</a>
+        — ${{ car.price }} — {{ car.get_status_display }}
+        </li>
+    {% empty %}
+        <li>No cars yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

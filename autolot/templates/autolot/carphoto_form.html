@@ -3,17 +3,19 @@
 <h1>Add Photo</h1>
 
 <h3>Upload from your computer</h3>
-<form method="post" enctype="multipart/form-data">
+<form class="card" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Upload</button>
-    <a href="{% url 'car-detail' view.kwargs.pk %}">Cancel</a>
+    <div class="action-links">
+        <button class="btn-primary" type="submit">Upload</button>
+        <a lass="btn" href="{% url 'car-detail' view.kwargs.pk %}">Cancel</a>
+    </div>
 </form>
 <hr>
 <h3>Or import default</h3>
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="import_api" value="1">
-    <button type="submit">Import</button>
+    <button class="btn-secondary" type="submit">Import</button>
 </form>
 {% endblock %}

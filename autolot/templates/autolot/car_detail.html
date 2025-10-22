@@ -20,12 +20,12 @@
 <h3>Photos ({{ object.photos.count }})</h3>
 <div class="car-photos-grid">
     {% for p in object.photos.all %}
-        <ul class="photo-item">
+        <figure class="photo-item">
             <img src="{{ p.image.url }}" alt="{{ p.caption|default:object.make }}"> 
             {% if p.caption %}<figcaption>{{ p.caption }}</figcaption>{% endif %}
-        </ul>
+        </figure>
     {% empty %}
-        <p>No photos have been uploaded yet.</p>
+        <p class="meta">No photos have been uploaded yet.</p>
     {% endfor %}
 </div>
 {% if user.is_authenticated and user == object.owner %}

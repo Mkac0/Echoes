@@ -2,17 +2,32 @@
 {% block content %}
 
 <h1>My Profile</h1>
-<div>
-    {% if object.avatar %}
-        <img src="{{ object.avatar.url }}" alt="Avatar" style="max-width:120px;border-radius:8px;">
-    {% endif %}
-    <p><strong>Name:</strong> {{ object.name }}</p>
-    <p><strong>Dealership:</strong> {{ object.dealership_name }}</p>
-    <p><strong>Bio:</strong> {{ object.bio|linebreaksbr }}</p>
-    <hr>
-    <p><strong>Account:</strong> {{ request.user.first_name }} {{ request.user.last_name }} — {{ request.user.email }}</p>
-    <p><a href="{% url 'profile-edit' %}">Edit Profile</a></p>
+<div class="card profile-card">
+    <div class="profile-header">
+        {% if object.avatar %}
+            <img src="{{ object.avatar.url }}" alt="Avatar" class="profile-avatar">
+        {% else %}
+            <div class="profile-avatar placeholder">👤</div>
+        {% endif %}
+        <div class="profile-info">
+            <h2>{{ object.name|default:request.user.username }}</h2>
+            {% if object.dealership_name %}
+                <p class="dealership">{{ object.dealership_name }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="profile-body">
+        {% if object.bio %}
+            <p class="bio">{{ object.bio|linebreaksbr }}</p>
+        {% else %}
+            <p class="no-bio">No bio added yet.</p>
+        {% endif %}
+        <hr>
+        <p class="meta"><strong>Account:</strong> {{ request.user.first_name }} {{ request.user.last_name }} — {{ request.user.email }}</p>
+    </div>
+    <div class="action-links mt-4">
+        <a href="{% url 'profile-edit' %}" class="btn-primary">Edit Profile</a>
+    </div>
 </div>
 
 {% endblock %}
-

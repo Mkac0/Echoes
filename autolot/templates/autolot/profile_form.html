@@ -2,7 +2,8 @@
 {% block content %}
 
 <h1>Edit Profile</h1>
-<form method="post" enctype="multipart/form-data">
+
+<form class="card profile-form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <fieldset>
         <legend>Profile</legend>
@@ -12,8 +13,11 @@
         <legend>Account</legend>
         {{ user_form.as_p }}
     </fieldset>
-    <button type="submit">Save</button>
-    <a href="{% url 'profile-detail' %}">Cancel</a>
+    <div class="action-links mt-4">
+        <button type="submit" class="btn-primary">Save</button>
+        <a href="{% url 'profile-detail' %}" class="btn">Cancel</a>
+    </div>
 </form>
 
 {% endblock %}
+

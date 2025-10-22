@@ -2,27 +2,32 @@
 {% block content %}
 
 <h1>Inventory</h1>
-<form method="get">
-    <input type="text" name="q" placeholder="Search make/model/VIN" value="{{ request.GET.q }}">
-    <select name="status">
-        <option value="">Any status</option>
-        {% for key,label in object_list.model.Status.choices %}
-        <option value="{{ key }}" {% if request.GET.status == key %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit">Filter</button>
+<form class="card" method="get">
+    <input type="text" name="query" placeholder="Search make/model/VIN" value="{{ request.GET.query }}">
+    <div style="display:flex; gap:10px; align-items:center">
+        <select name="status">
+            <option value="">Any status</option>
+            {% for key,label in object_list.model.Status.choices %}
+                <option value="{{ key }}" {% if request.GET.status == key %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn-primary" type="submit">Filter</button>
+        <a class="btn-secondary" href="{% url 'car-create' %}">Add Car</a>
+    </div>
     </form>
-
-    <a href="{% url 'car-create' %}">Add Car</a>
-    <ul>
-    {% for car in object_list %}
-        <li>
-        <a href="{% url 'car-detail' car.pk %}">{{ car.year }} {{ car.make }} {{ car.model }}</a>
-        — ${{ car.price }} — {{ car.get_status_display }}
-        </li>
-    {% empty %}
-        <li>No cars yet.</li>
-    {% endfor %}
-</ul>
+    <section class="cards">
+        {% for car in object_list %}
+        <article class="card">
+            <h3><a href="{% url 'car-detail' car.pk %}">{{ car.year }} {{ car.make }} {{ car.model }}</a></h3>
+            <p class="meta">
+                VIN: <strong>{{ car.vin }}</strong> &nbsp;&bull;&nbsp;
+                ${{ car.price }} &nbsp;&bull;&nbsp;
+                <span class="status-{{ car.status }}">{{ car.get_status_display }}</span>
+            </p>
+        </article>
+        {% empty %}
+        <p class="meta">No cars yet.</p>
+        {% endfor %}
+    </section>
 
 {% endblock %}

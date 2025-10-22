@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'autolot',
+    'Echoes',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

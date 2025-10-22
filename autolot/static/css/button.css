@@ -1,0 +1,74 @@
+button, .btn, .btn-primary, .btn-secondary, .btn-delete,
+a.btn-primary, a.btn-secondary, a.btn-delete {
+    display:inline-flex; 
+    align-items:center; 
+    gap:8px;
+    padding:10px 14px; 
+    border:1px solid transparent; 
+    border-radius:12px;
+    text-decoration:none; 
+    font-weight:600; 
+    cursor:pointer;
+    transition:transform .05s ease, background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.btn { 
+    background:rgba(148,163,184,.12); 
+    color: #e5e7eb; 
+    border-color: #1f2937; 
+}
+
+.btn:hover { 
+    background:rgba(148,163,184,.18) 
+}
+
+.btn-primary { 
+    background:linear-gradient(180deg, #22d3ee, #38bdf8); 
+    color:#001018;
+}
+
+.btn-primary:hover { 
+    filter:brightness(1.05) 
+}
+
+.btn-secondary { 
+    background:transparent; 
+    color: #38bdf8; 
+    border-color:rgba(56,189,248,.35)
+}
+
+.btn-secondary:hover { 
+    background:rgba(56,189,248,.08) 
+}
+
+.btn-delete { 
+    background:transparent; 
+    color: #ef4444; 
+    border-color:rgba(239,68,68,.35) 
+}
+
+.btn-delete:hover { 
+    background:rgba(239,68,68,.08) 
+}
+
+button:active, .btn:active { 
+    transform:translateY(1px) 
+}
+
+.action-links { 
+    display:flex; 
+    gap:10px; 
+    margin:8px 0 18px 
+}
+
+a { 
+    color: #38bdf8;
+}
+
+a:hover { 
+    text-decoration:underline 
+}
+
+.mt-4 { 
+    margin-top:1rem 
+}

@@ -1,0 +1,508 @@
+*{ box-sizing:border-box }
+
+html,body { 
+    height:100% 
+}
+
+body {
+    margin:0;
+    background: #0f172a;
+    color: #e5e7eb;
+    line-height: 1.4;
+    font: 16px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+header {
+    position:sticky; top:0; z-index:10;
+    background:linear-gradient(180deg, rgba(15,23,42,.85), rgba(15,23,42,.65));
+    backdrop-filter:saturate(160%) blur(10px);
+    border-bottom:1px solid #1f2937;
+}
+
+.header-logo-container h1 {
+    margin:0;
+    font-size:1.25rem;
+    letter-spacing:.5px;
+    color: #e5e7eb;
+}
+
+header > div, nav { 
+    display:flex; 
+    align-items:center; 
+    gap:18px 
+}
+
+header > div {
+    width: 100%;
+    max-width: none;
+    padding: 14px 20px;
+    margin-left: 0;
+    margin-right: 0;
+    justify-content:space-between; 
+    margin:0 auto 
+}
+
+.container {
+    width: min(1400px, 100% - 40px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav { 
+    display: flex; 
+    align-items: center; 
+}
+
+nav ul { 
+    display:flex;
+    align-items: center;
+    gap:14px; 
+    list-style:none; 
+    margin:0; 
+    padding:0 
+}
+
+nav li { 
+    display:flex;
+    align-items:center; 
+}
+
+nav form { 
+    margin:0; 
+}
+
+nav a { 
+    color: #94a3b8; 
+    text-decoration:none; 
+    padding:8px 12px; 
+    border-radius:10px 
+}
+
+nav a:hover { 
+    color: #e5e7eb; 
+    background:rgba(148,163,184,.12) 
+}
+
+nav button {
+    background: transparent;
+    color: #94a3b8;
+    border: 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font: inherit; 
+    line-height: 1;
+    cursor: pointer;
+}
+
+nav button:hover {
+    color: #e5e7eb;
+    background: rgba(148,163,184,.12);
+}
+
+.container { 
+    max-width:1100px; 
+    margin:28px auto; 
+    padding:0 20px 
+}
+
+.page-header h1, h1, h2, h3 { 
+    margin:.2rem 0 1rem 
+}
+
+hr { 
+    border:0; 
+    height:1px; 
+    background:linear-gradient(90deg, transparent, #1f2937, transparent); 
+    margin:24px 0 
+}
+
+.navbar-btn a,
+.navbar-btn button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-weight: 500;
+    color: #94a3b8;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navbar-btn a:hover,
+.navbar-btn button:hover {
+    color: #e5e7eb;
+    background: rgba(148,163,184,.12);
+    text-decoration: none;
+}
+
+.inventory-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.inventory-action-btn .btn-primary,
+.inventory-action-btn a.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    background: linear-gradient(180deg, #22d3ee, #38bdf8);
+    color: #001018;
+    text-decoration: none;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.inventory-action-btn .btn-primary:hover,
+.inventory-action-btn a.btn-primary:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.search-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.search-actions select {
+    width: auto;
+    min-width: 120px;
+    height: 42px;
+}
+
+.btn { 
+    background:rgba(148,163,184,.12); 
+    color: #e5e7eb; 
+    border-color: #1f2937; 
+}
+
+.btn:hover { 
+    background:rgba(148,163,184,.18);
+}
+
+.btn-primary { 
+    background:linear-gradient(180deg, #22d3ee, #38bdf8); 
+    color:#001018;
+}
+
+.btn-primary:hover { 
+    filter:brightness(1.05);
+}
+
+.btn-secondary { 
+    background:transparent; 
+    color: #38bdf8; 
+    border-color:rgba(56,189,248,.35);
+}
+
+.btn-secondary:hover { 
+    background:rgba(56,189,248,.08);
+}
+
+.btn-delete { 
+    background:transparent; 
+    color: #ef4444; 
+    border-color:rgba(239,68,68,.35);
+}
+
+.btn-delete:hover { 
+    background:rgba(239,68,68,.08);
+}
+
+button:active, .btn:active { 
+    transform:translateY(1px);
+}
+
+form { 
+    display:grid;
+    gap:16px;
+}
+
+input, select, textarea {
+    width:100%; 
+    background:#0a1220; 
+    color: #e5e7eb;
+    border:1px solid #1f2937; 
+    border-radius:12px;
+    padding:10px 12px;
+    outline:none;
+}
+
+input:focus, select:focus, textarea:focus { 
+    border-color: #38bdf8; 
+    box-shadow:0 0 0 4px rgba(56,189,248,.12) 
+}
+
+fieldset { 
+    border:1px solid #1f2937; 
+    border-radius:16px;
+    padding:14px 16px; 
+    background: #0b1220;
+}
+
+legend { 
+    padding:0 8px; 
+    color: #94a3b8; 
+}
+
+.messages { 
+    list-style:none; 
+    padding:0; 
+    margin:0 0 16px; 
+    display:grid; 
+    gap:10px 
+}
+
+.messages li { 
+    background: #0b1220; 
+    border:1px solid #1f2937; 
+    padding:10px 12px; 
+    border-radius:12px;
+}
+
+.messages li.success { 
+    border-color:rgba(34,197,94,.35); 
+}
+
+.messages li.error { 
+    border-color:rgba(239,68,68,.35); 
+}
+
+.card-form-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: nowrap;
+    margin-bottom: 32px;
+}
+
+.card-form-container > input[type="text"] {
+    flex: 1;
+    height: 42px;
+    padding: 0 12px;
+    border-radius: 12px;
+}
+
+.card-form-container > div {
+    display:flex; 
+    gap:10px; 
+    align-items:center;
+    flex-wrap: wrap;
+}
+
+.card-form-container select {
+    appearance: none;
+    background-repeat: no-repeat;
+    background: #0a1220;
+    color: #e5e7eb;
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 10px 36px 10px 12px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.card-form-container select:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 4px rgba(56,189,248,.12);
+    outline: none;
+}
+
+.card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: all .2s ease;
+}
+
+.card-link:hover {
+    text-decoration: none;
+    background:linear-gradient(180deg, rgba(56,189,248,.15), rgba(56,189,248,0) 35%), #111827;
+    border-color: #38bdf8;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.45);
+}
+
+.card-link h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.cards { 
+    display:grid; 
+    grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); 
+    gap:16px;
+}
+
+.card {
+    background:linear-gradient(180deg, rgba(56,189,248,.08), rgba(56,189,248,0) 35%), #111827;
+    border:1px solid #1f2937; 
+    width: 100%;
+    max-width: 520px;
+    border-radius: 16px;
+    padding:16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.35);
+}
+
+.card h3 { 
+    margin:.2rem 0 .6rem; 
+    font-size:1.05rem 
+}
+
+.card .meta { 
+    color: #94a3b8; 
+    font-size:.95rem 
+}
+
+.car-meta {
+    background: #0b1220; 
+    border:1px solid #1f2937;
+    border-radius: 16px;
+    padding:14px 16px; 
+    margin:10px 0 18px;
+}
+
+.status-available { 
+    color: #22c55e; 
+}
+
+.status-pending { 
+    color: #f59e0b;
+}
+
+.status-sold { 
+    color: #ef4444;
+}
+
+.car-photos-grid {
+    display:grid; 
+    grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); 
+    gap:14px;
+}
+
+.photo-item {
+    background: #111827; 
+    border:1px solid #1f2937; 
+    border-radius:14px; 
+    padding:8px;
+}
+
+.photo-item img { 
+    width:100%; 
+    height:150px; 
+    object-fit:cover; 
+    border-radius:10px 
+}
+
+.photo-item figcaption { 
+    color: #94a3b8; 
+    margin-top:6px; 
+    font-size:.9rem 
+}
+
+a { 
+    color: #38bdf8;
+}
+
+a:hover { 
+    text-decoration:underline 
+}
+
+.mt-4 { 
+    margin-top:1rem 
+}
+
+.action-links { 
+    display:flex; 
+    gap:10px; 
+    margin:8px 0 18px 
+}
+
+.profile-card, .profile-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 1rem;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1f2937;
+    background: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.profile-avatar.placeholder {
+    color: #94a3b8;
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #e5e7eb;
+}
+
+.profile-info .dealership {
+    color: #94a3b8;
+    margin-top: 2px;
+    font-size: 0.95rem;
+}
+
+.profile-body {
+    color: #e5e7eb;
+}
+
+.profile-body .bio {
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+    white-space: pre-line;
+}
+
+.profile-body .no-bio {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.profile-body .meta {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 700px) {
+    .card-form-container { 
+        flex-direction: column; 
+        align-items: stretch; 
+    }
+    .search-actions { 
+        justify-content: space-between; 
+    }
+}

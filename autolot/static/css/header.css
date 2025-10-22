@@ -1,0 +1,26 @@
+header {
+    position:sticky; top:0; z-index:10;
+    background:linear-gradient(180deg, rgba(15,23,42,.85), rgba(15,23,42,.65));
+    backdrop-filter:saturate(160%) blur(10px);
+    border-bottom:1px solid #1f2937;
+}
+
+.header-logo-container h1 {
+    margin:0;
+    font-size:1.25rem;
+    letter-spacing:.5px;
+    color: #e5e7eb;
+}
+
+header > div, nav { 
+    display:flex; 
+    align-items:center; 
+    gap:18px 
+}
+
+header > div { 
+    padding:14px 22px; 
+    justify-content:space-between; 
+    max-width:1100px; 
+    margin:0 auto 
+}

@@ -13,30 +13,30 @@
     </head>
     <body>
         <header>
-        <div class="header-logo-container">
-            <a href="/">
-                <h1>Echoes</h1>
-            </a>
-        </div>
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'car-list' %}">Inventory</a></li>
-                    <li><a href="{% url 'car-create' %}">Add Car</a></li>
-                    <li><a href="{% url 'profile-detail' %}">Profile</a></li>
-                    <li>
-                        <form id="logout-form" method="post" action="{% url 'logout' %}">
-                            {% csrf_token %}
-                            <button type="submit">Log out</button>
-                        </form>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'car-list' %}">Inventory</a></li>
-                    <li><a href="{% url 'home' %}">Login</a></li>
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                {% endif %}
-            </ul>
-        </nav>
+            <div>
+                <div class="header-logo-container">
+                    <h1>Echoes</h1>
+                </div>
+                <nav>
+                    <ul class="navbar-btn">
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'car-list' %}">Inventory</a></li>
+                            <li><a href="{% url 'car-create' %}">Add Car</a></li>
+                            <li><a href="{% url 'profile-detail' %}">Profile</a></li>
+                            <li>
+                                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit">Log out</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li><a href="{% url 'car-list' %}">Inventory</a></li>
+                            <li><a href="{% url 'home' %}">Login</a></li>
+                            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
         </header>
         <main class="container">
         {% block content %} 

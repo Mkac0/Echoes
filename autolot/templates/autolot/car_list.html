@@ -2,32 +2,34 @@
 {% block content %}
 
 <h1>Inventory</h1>
-<form class="card" method="get">
-    <input type="text" name="query" placeholder="Search make/model/VIN" value="{{ request.GET.query }}">
-    <div style="display:flex; gap:10px; align-items:center">
+<form class="card-form-container" method="get">
+    <input type="text" name="q" placeholder="Search make/model/VIN" value="{{ request.GET.q }}">
+    <div class="search-actions">
         <select name="status">
-            <option value="">Any status</option>
-            {% for key,label in object_list.model.Status.choices %}
-                <option value="{{ key }}" {% if request.GET.status == key %}selected{% endif %}>{{ label }}</option>
-            {% endfor %}
-        </select>
-        <button class="btn-primary" type="submit">Filter</button>
-        <a class="btn-secondary" href="{% url 'car-create' %}">Add Car</a>
-    </div>
-    </form>
-    <section class="cards">
-        {% for car in object_list %}
-        <article class="card">
-            <h3><a href="{% url 'car-detail' car.pk %}">{{ car.year }} {{ car.make }} {{ car.model }}</a></h3>
-            <p class="meta">
-                VIN: <strong>{{ car.vin }}</strong> &nbsp;&bull;&nbsp;
-                ${{ car.price }} &nbsp;&bull;&nbsp;
-                <span class="status-{{ car.status }}">{{ car.get_status_display }}</span>
-            </p>
-        </article>
-        {% empty %}
-        <p class="meta">No cars yet.</p>
+        <option value="">Any</option>
+        {% for key,label in object_list.model.Status.choices %}
+            <option value="{{ key }}" {% if request.GET.status == key %}selected{% endif %}>{{ label }}</option>
         {% endfor %}
-    </section>
+        </select>
+        <div class="inventory-action-btn">
+            <button class="btn-primary" type="submit">Filter</button>
+            <a href="{% url 'car-create' %}" class="btn-primary">Add Car</a>
+        </div>
+    </div>
+</form>
+<section class="cards">
+    {% for car in object_list %}
+    <a href="{% url 'car-detail' car.pk %}" class="card card-link">
+        <h3>{{ car.year }} {{ car.make }} {{ car.model }}</h3>
+        <p class="meta">
+            VIN: <strong>{{ car.vin }}</strong> &nbsp;&bull;&nbsp;
+            ${{ car.price }} &nbsp;&bull;&nbsp;
+            <span class="status-{{ car.status }}">{{ car.get_status_display }}</span>
+        </p>
+    </a>
+    {% empty %}
+        <p class="meta">No cars yet.</p>
+    {% endfor %}
+</section>
 
 {% endblock %}

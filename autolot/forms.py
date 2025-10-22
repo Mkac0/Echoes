@@ -1,27 +1,20 @@
 from django import forms
 from django.contrib.auth.models import User as AuthUser
-from .models import Profile, Car, CarPhoto, User
+from .models import Profile, Car, CarPhoto, CustomerLead
 from .services import fetch_vehicle_by_vin
 
 class CarForm(forms.ModelForm):
     auto_import_photo = forms.BooleanField(
         required=False, initial=True,
-        label='Auto-import first photo from VIN API'
+        label='Auto-import'
     )
     class Meta:
         model = Car
         fields = ['make', 'model', 'trim', 'year', 'vin', 'mileage', 'price', 'condition', 'status']
-    
-    def clean(self):
-        cleaned_data = super().clean()
-        vin = cleaned_data.get('vin')
-
-        if vin:
-            data = fetch_vehicle_by_vin(vin)
-            cleaned_data['make'] = data.get('make', cleaned_data.get('make'))
-            cleaned_data['model'] = data.get('model', cleaned_data.get('model'))
-            cleaned_data['year'] = data.get('year', cleaned_data.get('year'))
-        return cleaned_data
+    def clean_vin(self):
+        vin = self.cleaned_data.get('vin')
+        if not vin or len(vin) != 17:
+            return {"error": "VIN must be 17 characters."}
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -33,12 +26,12 @@ class UserAccountForm(forms.ModelForm):
         model = AuthUser
         fields = ['first_name', 'last_name', 'email']
 
-class UserForm(forms.ModelForm):
+class CustomerLeadForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = CustomerLead
         fields = ['first_name', 'last_name', 'email', 'interested_in', 'status']
 
 class CarPhotoForm(forms.ModelForm):
     class Meta:
         model = CarPhoto
-        fields = ['image']
+        fields = ['image', 'caption']

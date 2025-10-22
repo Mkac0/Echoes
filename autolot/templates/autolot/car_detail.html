@@ -1,24 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
+
 <h2>{{ object.year }} {{ object.make }} {{ object.model }}</h2>
-<p>VIN: {{ object.vin }} — Mileage: {{ object.mileage }} — ${{ object.price }} — {{ object.condition }}</p>
-<p>Status: {{ object.get_status_display }}</p>
-
-{% if user.is_authenticated %}
-    <a href="{% url 'car-update' object.pk %}">Edit</a>
-    <a href="{% url 'car-delete' object.pk %}">Delete</a>
+<div class="car-meta">
+    <p>
+        VIN: <strong>{{ object.vin }}</strong>
+        Mileage: {{ object.mileage }}
+        Price: ${{ object.price }}
+        Condition: {{ object.condition }}
+    </p>
+    <p>Status: <span class="status-{{ object.status }}">{{ object.get_status_display }}</span></p>
+</div>
+{% if user.is_authenticated == object.owner %}
+    <div class="action-links">
+        <a href="{% url 'car-update' object.pk %}" class="btn-primary">Edit</a>
+        <a href="{% url 'car-delete' object.pk %}" class="btn-delete">Delete</a>
+    </div>
 {% endif %}
-
-<h3>Photos</h3>
-<ul>
+<h3>Photos ({{ object.photos.count }})</h3>
+<div class="car-photos-grid">
     {% for p in object.photos.all %}
-        <li><img src="{{ p.image.url }}" style="max-width:200px;"> {{ p.caption }}</li>
+        <ul class="photo-item">
+            <img src="{{ p.image.url }}" alt="{{ p.caption|default:object.make }}"> 
+            {% if p.caption %}<figcaption>{{ p.caption }}</figcaption>{% endif %}
+        </ul>
     {% empty %}
-        <li>No photos yet.</li>
+        <p>No photos have been uploaded yet.</p>
     {% endfor %}
-</ul>
-
-{% if user.is_authenticated %}
-    <a href="{% url 'carphoto-create' object.pk %}">Upload Photo</a>
+</div>
+{% if user.is_authenticated and user == object.owner %}
+    <div class="mt-4">
+        <a href="{% url 'carphoto-create' object.pk %}" class="btn-secondary">Add Photos</a>
+    </div>
 {% endif %}
+
 {% endblock %}

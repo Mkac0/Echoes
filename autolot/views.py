@@ -57,7 +57,7 @@ class CarList(ListView):
         query = self.request.GET.get('query') or ''
         status = self.request.GET.get('status')
         if query:
-            queryset = queryset.filter(vin_icontains=query)
+            queryset = queryset.filter(vin__icontains=query)
         if status:
             queryset = queryset.filter(status=status)
         return queryset

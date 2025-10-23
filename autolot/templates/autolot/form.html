@@ -2,14 +2,35 @@
 {% block content %}
 
 <h1>{{ view.object|default_if_none:"New Car" }}</h1>
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" class="card form-card car-form">
     {% csrf_token %}
-    {{ form.as_p }}
-    <p class="meta">* VIN, Year, and Mileage are required.</p>
+    <div class="form-grid">
+        {% for field in form %}
+        {% if field.name == 'auto_import_photo' %}
+            <div class="xrow xrow--checkbox">
+            <label class="xcheck-inline">
+                {{ field }}
+                <span class="xcheck-label">{{ field.label }}</span>
+            </label>
+            {% if field.help_text %}<small class="xhelp">{{ field.help_text }}</small>{% endif %}
+            {% for error in field.errors %}<div class="xerror">{{ error }}</div>{% endfor %}
+            </div>
+        {% else %}
+            <div class="xrow">
+            <label class="xlabel" for="{{ field.id_for_label }}">
+                {{ field.label }}{% if field.name in 'vin year mileage' %}<span class="xreq" title="Required">*</span>{% endif %}
+            </label>
+            {{ field }}
+            {% if field.help_text %}<small class="xhelp">{{ field.help_text }}</small>{% endif %}
+            {% for error in field.errors %}<div class="xerror">{{ error }}</div>{% endfor %}
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
     <div class="action-links">
-        <button class="btn-primary" type="submit">Save</button>
+        <button class="btn" type="submit">Save</button>
         <a class="btn" href="{% url 'car-list' %}">Cancel</a>
     </div>
 </form>
-    
+
 {% endblock %}

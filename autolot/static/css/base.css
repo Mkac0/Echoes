@@ -271,6 +271,7 @@ hr {
     justify-content: center;
     font-weight: 600;
     font-family: inherit;
+    font-size: 12;
     border-radius: 12px;
     border: none;
     padding: 8px 16px;
@@ -722,6 +723,78 @@ a:hover {
     font-size: .9rem;
     text-align: center;
 }
+
+.xrow { margin-bottom: 14px; }
+
+.xrow .xlabel {
+    display: inline-block;
+    margin-bottom: 6px;
+    color: #cbd5e1;
+    font-weight: 600;
+    letter-spacing: .2px;
+}
+
+.xreq { 
+    color: #f87171; 
+    margin-left: 4px; 
+}
+
+.xhelp { 
+    color: #94a3b8; 
+    font-size: .9rem; 
+}
+
+.xerror {
+    margin-top: 6px;
+    color: #fecaca;
+    background: rgba(239,68,68,.06);
+    border: 1px solid rgba(239,68,68,.25);
+    padding: 8px 10px;
+    border-radius: 10px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+}
+
+.form-grid .xrow:nth-child(1) { 
+    grid-column: 1 / -1; 
+}
+
+.xrow--checkbox { 
+    grid-column: 1 / -1; 
+}
+
+.xcheck-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 12px;
+  background: #0a1220;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+}
+
+.xcheck-inline input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #38bdf8;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.xcheck-label {
+    color: #e5e7eb;
+    font-weight: 500;
+}
+
+.xrow--checkbox .xhelp { 
+    margin-left: 6px; 
+}
+
 
 @media (max-width: 700px) {
     .card-form-container { 

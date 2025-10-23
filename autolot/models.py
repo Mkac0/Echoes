@@ -23,14 +23,14 @@ class Car(models.Model):
         PENDING = 'pending', 'Pending'
         SOLD = 'sold', 'Sold'
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
-    make = models.CharField(max_length=50)
-    model = models.CharField(max_length=50)
+    make = models.CharField(max_length=50, blank=True)
+    model = models.CharField(max_length=50, blank=True)
     trim = models.CharField(max_length=50, blank=True)
     year = models.PositiveIntegerField(validators=[MinValueValidator(1900)])
-    vin = models.CharField('VIN', max_length=17, unique=True)
+    vin = models.CharField('VIN', max_length=17, unique=True, null=True, blank=True)
     mileage = models.PositiveBigIntegerField(default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
-    condition = models.CharField(max_length=20, default='Used')
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, validators=[MinValueValidator(0)])
+    condition = models.CharField(max_length=20, default='Used', blank=True)
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.AVAILABLE)
     def __str__(self):
         return f"{self.year} {self.make} {self.model} {self.vin}"

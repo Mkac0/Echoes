@@ -4,17 +4,32 @@ from .models import Profile, Car, CarPhoto, CustomerLead
 from .services import fetch_vehicle_by_vin
 
 class CarForm(forms.ModelForm):
-    auto_import_photo = forms.BooleanField(
-        required=False, initial=True,
-        label='Auto-import'
-    )
+    auto_import_photo = forms.BooleanField(required=False, initial=True, label='Auto-import first photo from VIN API')
+
     class Meta:
         model = Car
-        fields = ['make', 'model', 'trim', 'year', 'vin', 'mileage', 'price', 'condition', 'status']
-    def clean_vin(self):
-        vin = self.cleaned_data.get('vin')
-        if not vin or len(vin) != 17:
-            return {"error": "VIN must be 17 characters."}
+        fields = ['vin', 'year', 'make', 'model', 'trim', 'mileage', 'price', 'condition', 'status']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['vin'].required = True
+        self.fields['year'].required = True
+        self.fields['mileage'].required = True
+        for name in ['make', 'model', 'trim', 'price', 'condition', 'status']:
+            self.fields[name].required = False
+
+    def clean(self):
+        cleaned = super().clean()
+        vin = cleaned.get('vin')
+        if vin:
+            data = fetch_vehicle_by_vin(vin) or {}
+            cleaned['make']  = cleaned.get('make')  or data.get('make')
+            cleaned['model'] = cleaned.get('model') or data.get('model')
+            cleaned['year']  = cleaned.get('year')  or data.get('year')
+        for field in ['vin', 'year', 'mileage']:
+            if not cleaned.get(field):
+                self.add_error(field, f'{field.title()} is required.')
+        return cleaned
 
 class ProfileForm(forms.ModelForm):
     class Meta:

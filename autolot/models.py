@@ -27,7 +27,7 @@ class Car(models.Model):
     model = models.CharField(max_length=50, blank=True)
     trim = models.CharField(max_length=50, blank=True)
     year = models.PositiveIntegerField(validators=[MinValueValidator(1900)])
-    vin = models.CharField('VIN', max_length=17, unique=True, null=True, blank=True)
+    vin = models.CharField('VIN', max_length=17, unique=True)
     mileage = models.PositiveBigIntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, validators=[MinValueValidator(0)])
     condition = models.CharField(max_length=20, default='Used', blank=True)

@@ -5,6 +5,7 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
+    <p class="meta">* VIN, Year, and Mileage are required.</p>
     <div class="action-links">
         <button class="btn-primary" type="submit">Save</button>
         <a class="btn" href="{% url 'car-list' %}">Cancel</a>

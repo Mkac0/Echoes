@@ -54,10 +54,10 @@ class CarList(ListView):
     template_name = 'autolot/car_list.html'
     def get_queryset(self):
         queryset = super().get_queryset()
-        query = self.request.GET.get('query')
+        query = self.request.GET.get('query') or ''
         status = self.request.GET.get('status')
         if query:
-            queryset = queryset.filter(Q(make__icontains=query) | Q(model__icontains=query) | Q(vin__icontains=query)).distinct()
+            queryset = queryset.filter(vin_icontains=query)
         if status:
             queryset = queryset.filter(status=status)
         return queryset

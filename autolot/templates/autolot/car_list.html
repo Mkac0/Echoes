@@ -3,7 +3,7 @@
 
 <h1>Inventory</h1>
 <form class="card-form-container" method="get">
-    <input type="text" name="q" placeholder="Search make/model/VIN" value="{{ request.GET.q }}">
+    <input type="text" name="query" placeholder="Search VIN" value="{{ request.GET.query }}">
     <div class="search-actions">
         <select name="status">
         <option value="">Any</option>

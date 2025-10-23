@@ -1,15 +1,20 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 {% if not user.is_authenticated %}
-    <section>
-        <form action="{% url 'home' %}" method="post" class="login">
-            <h1>Login</h1>
-            {% csrf_token %} {{ form.as_p }}
-            <input type="hidden" name="next" value="{{ next }}" />
-            <button type="submit" class="btn submit">Login</button>
-        </form>
-    </section>
+<section class="auth-section">
+    <form action="{% url 'home' %}" method="post" class="auth-card">
+        <h1>Welcome Back</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <button type="submit" class="btn-primary full-width">Log In</button>
+        <p class="auth-footer">
+            Don't have an account?
+            <a href="{% url 'signup' %}">Sign up</a>
+        </p>
+    </form>
+</section>
 {% endif %}
 {% endblock %}

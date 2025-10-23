@@ -99,6 +99,85 @@ nav button:hover {
     background: rgba(148,163,184,.12);
 }
 
+.auth-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 120px);
+    padding: 2rem;
+}
+
+.auth-card {
+    background: linear-gradient(180deg, rgba(56,189,248,.06), rgba(56,189,248,0) 40%), #111827;
+    border: 1px solid #1f2937;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.4);
+    padding: 2rem 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    text-align: center;
+}
+
+.auth-card h1 {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    color: #f1f5f9;
+}
+
+.auth-card label {
+    display: block;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 9px;
+}
+
+.auth-card input[type="text"],
+.auth-card input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #1f2937;
+    background: #0a1220;
+    color: #e5e7eb;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.auth-card input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 4px rgba(56,189,248,.12);
+    outline: none;
+}
+
+.auth-card .full-width {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.auth-footer {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.auth-footer a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
 .container { 
     max-width:1100px; 
     margin:28px auto; 

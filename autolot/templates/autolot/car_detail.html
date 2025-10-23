@@ -1,49 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>{{ object.year }} {{ object.make }} {{ object.model }}</h2>
-<div class="car-meta">
-    <p>
-        VIN: <strong>{{ object.vin }}</strong>
-        &nbsp;•&nbsp; Mileage: {{ object.mileage }}
-        &nbsp;•&nbsp; Price: ${{ object.price }}
-        &nbsp;•&nbsp; Condition: {{ object.condition }}
-    </p>
-    <p>Status: <span class="status-{{ object.status }}">{{ object.get_status_display }}</span></p>
-</div>
-{% if request.user.is_authenticated %}
-  {% if request.user == object.owner or request.user.is_lead %}
-    <div class="action-links">
-        <a href="{% url 'car-update' object.pk %}" class="btn btn-primary">Edit</a>
-        <form action="{% url 'car-delete' object.pk %}" method="post" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-delete" onclick="return confirm('Delete car?');">
-            Delete
-            </button>
-        </form>
+<div class="car-detail-container">
+    <div class="car-header">
+        <h2>{{ object.year }} {{ object.make }} {{ object.model }}</h2>
+        <p class="vin">VIN: <strong>{{ object.vin }}</strong></p>
     </div>
-  {% endif %}
-{% endif %}
-<h3>Photos ({{ object.photos.count }})</h3>
-<div class="car-photos-grid">
-    {% for p in object.photos.all %}
-        <figure class="photo-item">
-        <img src="{{ p.image.url }}" alt="{{ p.caption|default:object.make }}">
-        {% if p.caption %}
-            <figcaption>{{ p.caption }}</figcaption>
+    <div class="car-meta">
+        <div class="meta-item"><span>Mileage:</span> {{ object.mileage|default:"N/A" }}</div>
+        <div class="meta-item"><span>Price:</span> ${{ object.price|default:"0.00" }}</div>
+        <div class="meta-item"><span>Condition:</span> {{ object.condition|default:"Used" }}</div>
+        <div class="meta-item">
+            <span>Status:</span> 
+            <span class="status status-{{ object.status }}">{{ object.get_status_display }}</span>
+        </div>
+    </div>
+    {% if request.user.is_authenticated %}
+        {% if request.user == object.owner or request.user.is_lead %}
+            <div class="action-links">
+                <a href="{% url 'car-update' object.pk %}" class="btn edit-btn">Edit</a>
+                <form action="{% url 'car-delete' object.pk %}" method="post" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn delete-btn" onclick="return confirm('Delete this car?');">
+                    Delete
+                    </button>
+                </form>
+            </div>
         {% endif %}
-        </figure>
-    {% empty %}
-        <p class="meta">No photos have been uploaded yet.</p>
-    {% endfor %}
-</div>
-
-{% if request.user.is_authenticated %}
-  {% if request.user == object.owner or request.user.is_lead %}
-    <div class="mt-4">
-        <a href="{% url 'carphoto-create' object.pk %}" class="btn btn-secondary">Add Photos</a>
+    {% endif %}
+    <hr class="divider"/>
+    <h3>Photos ({{ object.photos.count }})</h3>
+    <div class="car-photos-grid">
+        {% for p in object.photos.all %}
+            <figure class="photo-item">
+                <img src="{{ p.image.url }}" alt="{{ p.caption|default:object.make }}">
+                {% if p.caption %}
+                    <figcaption>{{ p.caption }}</figcaption>
+                {% endif %}
+            </figure>
+        {% empty %}
+            <p class="meta">No photos have been uploaded yet.</p>
+        {% endfor %}
     </div>
-  {% endif %}
-{% endif %}
+    {% if request.user.is_authenticated %}
+        {% if request.user == object.owner or request.user.is_lead %}
+            <div class="mt-4">
+                <a href="{% url 'carphoto-create' object.pk %}" class="btn btn-secondary">Add Photos</a>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
 
 {% endblock %}

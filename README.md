@@ -6,7 +6,7 @@ Echos is a CRUD application built with Django that allows users to create, read,
 
 Selling cars made easy.
 
-[Deployed App](https://echoes-644fddc8796a.herokuapp.com/) | [Project Planning](https://trello.com/b/NmoDQrSz/echoes) | 
+[Deployed App](https://echoes-644fddc8796a.herokuapp.com/) | [Project Planning](https://trello.com/b/NmoDQrSz/echoes)
 
 
 ## Why Echoes

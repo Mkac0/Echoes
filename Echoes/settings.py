@@ -32,6 +32,12 @@ AUTO_DEV_API_KEY = os.getenv('AUTO_DEV_API_KEY', '')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    os.getenv("HEROKU_APP_NAME", "") + ".herokuapp.com",
+]
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -42,7 +48,6 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'autolot',
-    'Echoes',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -99,7 +104,7 @@ if 'ON_HEROKU' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }

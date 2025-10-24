@@ -610,7 +610,7 @@ a:hover {
 }
 
 .car-detail-container {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 40px auto;
     background: linear-gradient(180deg, rgba(56,189,248,.05), rgba(56,189,248,0) 35%), #0f172a;
     border: 1px solid #1f2937;
@@ -688,12 +688,6 @@ a:hover {
 
 .status-sold { 
     color: #ef4444; 
-}
-
-.car-photos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 14px;
 }
 
 .photo-item {
@@ -808,6 +802,134 @@ a:hover {
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
+}
+
+.car-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.car-photos-grid .photo-item { 
+    margin: 0;
+    background: #0b1220;
+    border: 1px solid #1f2937;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.25);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.car-photos-grid .photo-item:hover {
+    transform: translateY(-2px);
+    border-color: #38bdf8;
+    box-shadow: 0 14px 30px rgba(0,0,0,.35);
+}
+
+.car-photos-grid .photo-item img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.car-photos-grid .photo-item figcaption {
+    color: #94a3b8;
+    margin-top: 6px;
+    font-size: .92rem;
+    line-height: 1.25;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.car-photos-grid .photo-item .photo-actions,
+.car-photos-grid .photo-item p {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0 0;
+}
+
+.car-photos-grid .photo-item a,
+.car-photos-grid .photo-item button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: .86rem;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.car-photos-grid .photo-item a { 
+    background: linear-gradient(180deg,#22d3ee,#38bdf8);
+    color:#001018;
+}
+.car-photos-grid .photo-item a:hover { 
+    filter: brightness(1.05); 
+}
+
+.car-photos-grid .photo-item button {
+    background: linear-gradient(180deg, rgba(239,68,68,.9), rgba(185,28,28,1));
+    color: #fff;
+}
+.car-photos-grid .photo-item button:hover { 
+    filter: brightness(1.05); 
+}
+
+.form-card {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    background: linear-gradient(180deg, rgba(56,189,248,.06), rgba(56,189,248,0) 40%), #111827;
+    border: 1px solid #1f2937;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.4);
+    padding: 24px 28px;
+}
+
+.form-card img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0,0,0,.3);
+}
+
+form[action*="import_api"] {
+    display: flex;
+    justify-content: center;
+}
+
+form[action*="import_api"] .btn-primary {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    height: 46px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(180deg, #22d3ee, #38bdf8);
+    color: #001018;
+    transition: all 0.2s ease;
+}
+
+form[action*="import_api"] .btn-primary:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+
+a.btn,
+.btn,
+a.btn:hover,
+.btn:hover {
+    text-decoration: none !important;
 }
 
 @media (max-width: 700px) {

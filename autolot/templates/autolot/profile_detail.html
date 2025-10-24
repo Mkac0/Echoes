@@ -25,9 +25,26 @@
         <hr>
         <p class="meta"><strong>Account:</strong> {{ request.user.first_name }} {{ request.user.last_name }} — {{ request.user.email }}</p>
     </div>
-    <div class="action-links mt-4">
-        <a href="{% url 'profile-edit' %}" class="btn">Edit</a>
-    </div>
 </div>
+<hr class="divider">
+<section class="cards">
+    {% for car in cars %}
+        <a href="{% url 'car-detail' car.pk %}" class="card card-link">
+            <h3>{{ car.year }} {{ car.make }} {{ car.model }}</h3>
+            <p class="meta">
+                VIN: <strong>{{ car.vin }}</strong> &nbsp;&bull;&nbsp;
+                ${{ car.price|default:"N/A" }} &nbsp;&bull;&nbsp;
+                <span class="status-{{ car.status }}">{{ car.get_status_display }}</span>
+            </p>
+        </a>
+    {% empty %}
+        <p class="meta">No cars yet.</p>
+    {% endfor %}
+</section>
+{% if request.user == object.user %}
+    <div class="action-links">
+        <a href="{% url 'profile-edit' %}" class="btn btn-primary">Edit Profile</a>
+    </div>
+{% endif %}
 
 {% endblock %}

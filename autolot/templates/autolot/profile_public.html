@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card profile-card">
+    <div class="profile-header">
+        {% if owner.profile.avatar %}
+            <img class="profile-avatar" src="{{ owner.profile.avatar.url }}" alt="">
+        {% else %}
+            <div class="profile-avatar placeholder">{{ owner.get_username }}</div>
+        {% endif %}
+            <div class="profile-info">
+                <h2>{{ owner.profile.name|default:owner.get_username }}</h2>
+                {% if owner.profile.dealership_name %}
+                    <div class="dealership">{{ owner.profile.dealership_name }}</div>
+            {% endif %}
+        </div>
+    </div>
+    {% if owner.profile.bio %}
+        <div class="profile-body bio">{{ owner.profile.bio|linebreaksbr }}</div>
+    {% endif %}
+    <hr class="divider">
+    <section class="cards">
+        {% for car in cars %}
+            <a href="{% url 'car-detail' car.pk %}" class="card card-link">
+                <h3>{{ car.year }} {{ car.make }} {{ car.model }}</h3>
+                <p class="meta">
+                    VIN: <strong>{{ car.vin }}</strong> &nbsp;&bull;&nbsp;
+                    ${{ car.price|default:"N/A" }} &nbsp;&bull;&nbsp;
+                    <span class="status-{{ car.status }}">{{ car.get_status_display }}</span>
+                </p>
+            </a>
+        {% empty %}
+            <p class="meta">No cars yet.</p>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

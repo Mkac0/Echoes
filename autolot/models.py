@@ -23,9 +23,9 @@ class Car(models.Model):
         PENDING = 'pending', 'Pending'
         SOLD = 'sold', 'Sold'
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
-    make = models.CharField(max_length=50, blank=True)
-    model = models.CharField(max_length=50, blank=True)
-    trim = models.CharField(max_length=50, blank=True)
+    make = models.CharField(max_length=50, blank=True, default='')
+    model = models.CharField(max_length=50, blank=True, default='')
+    trim = models.CharField(max_length=50, blank=True, default='')
     year = models.PositiveIntegerField(validators=[MinValueValidator(1900)])
     vin = models.CharField('VIN', max_length=17, unique=True)
     mileage = models.PositiveBigIntegerField(default=0)

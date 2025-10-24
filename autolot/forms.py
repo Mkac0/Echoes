@@ -4,7 +4,9 @@ from .models import Profile, Car, CarPhoto, CustomerLead
 from .services import fetch_vehicle_by_vin
 
 class CarForm(forms.ModelForm):
-    auto_import_photo = forms.BooleanField(required=False, initial=True, label='Import Default')
+    make = forms.CharField(required=False)
+    model = forms.CharField(required=False)
+    trim = forms.CharField(required=False)
 
     class Meta:
         model = Car

@@ -8,8 +8,7 @@
         {% if object.owner and object.owner.profile %}
             <p class="car-owner">
                 Owner:
-                <a class="profile-link"
-                    href="{% url 'profile-public' object.owner.profile.pk %}">
+                <a class="profile-link" href="{% url 'profile-public' object.owner_id %}">
                     {{ object.owner.get_username }}
                 </a>
             </p>

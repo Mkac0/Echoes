@@ -1,6 +1,6 @@
-from django.shortcuts import redirect, render
+from gc import get_objects
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
-from django.db.models import Q
 from .models import Car, CustomerLead, CarPhoto
 from .forms import CarForm, CustomerLeadForm, CarPhotoForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -8,6 +8,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 import requests
 from django.contrib import messages
 from django.core.files.base import ContentFile
@@ -23,10 +24,43 @@ class ProfileDetail(LoginRequiredMixin, DetailView):
     template_name = 'autolot/profile_detail.html'
     def get_object(self, queryset=None):
         return self.request.user.profile
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cars'] = (Car.objects
+                       .filter(owner=self.request.user)
+                       .select_related('owner')
+                       .order_by('-id'))
+        return context
 
 class ProfilePublicDetail(DetailView):
-    model = Profile
-    template_name = 'autolot/profile_detail.html'
+    model = User
+    template_name = 'autolot/profile_public.html'
+    pk_url_kwarg = 'user_pk'
+    context_object_name = 'owner'
+    def get_queryset(self):
+        return User.objects.select_related('profile')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cars'] = (Car.objects
+                       .filter(owner=self.object)
+                       .select_related('owner')
+                       .order_by('-id'))
+        return context
+
+class ProfilePublic(DetailView):
+    model = User
+    template_name = 'autolot/profile_public.html'
+    pk_url_kwarg = 'user_pk'
+    context_object_name = 'owner'
+    def get_queryset(self):
+        return User.objects.select_related('profile')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cars'] = (Car.objects
+                       .filter(owner=self.object)
+                       .select_related('owner')
+                       .order_by('-id'))
+        return context
 
 class ProfileEdit(LoginRequiredMixin, UpdateView):
     model = Profile

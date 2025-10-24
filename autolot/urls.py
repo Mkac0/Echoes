@@ -15,6 +15,7 @@ urlpatterns = [
     path("leads/<int:pk>/delete/", views.CustomerLeadDelete.as_view(), name="customerlead-delete"),
     path('accounts/signup/', views.signup, name='signup'),
     path('profile/', views.ProfileDetail.as_view(), name='profile-detail'),
+    path('profiles/<int:pk>/', views.ProfilePublicDetail.as_view(), name='profile-public'),
     path('profile/edit/', views.ProfileEdit.as_view(), name='profile-edit'),
     path("cars/photos/<int:pk>/edit/", views.CarPhotoUpdate.as_view(), name="carphoto-update"),
     path("cars/photos/<int:pk>/delete/", views.CarPhotoDelete.as_view(), name="carphoto-delete"),

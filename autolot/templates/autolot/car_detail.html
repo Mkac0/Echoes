@@ -5,6 +5,15 @@
     <div class="car-header">
         <h2>{{ object.year }} {{ object.make }} {{ object.model }}</h2>
         <p class="vin">VIN: <strong>{{ object.vin }}</strong></p>
+        {% if object.owner and object.owner.profile %}
+            <p class="car-owner">
+                Owner:
+                <a class="profile-link"
+                    href="{% url 'profile-public' object.owner.profile.pk %}">
+                    {{ object.owner.get_username }}
+                </a>
+            </p>
+        {% endif %}
     </div>
     <div class="car-meta">
         <div class="meta-item"><span>Mileage:</span> {{ object.mileage|default:"N/A" }}</div>
@@ -37,7 +46,9 @@
                 {% if p.caption %}<figcaption>{{ p.caption }}</figcaption>{% endif %}
                 {% if request.user.is_authenticated and request.user == object.owner %}
                     <div class="photo-actions">
-                        <a class="btn btn-sm" href="{% url 'carphoto-update' p.pk %}">Edit</a>
+                        {% if request.user == object.user %}
+                            <p><a href="{% url 'profile-edit' %}" class="btn btn-primary">Edit Profile</a></p>
+                        {% endif %}
                         <form method="post" action="{% url 'carphoto-delete' p.pk %}" onsubmit="return confirm('Delete this photo?');">
                             {% csrf_token %}
                             <button class="btn btn-sm btn-delete" type="submit">Delete</button>

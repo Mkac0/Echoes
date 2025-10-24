@@ -24,6 +24,10 @@ class ProfileDetail(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         return self.request.user.profile
 
+class ProfilePublicDetail(DetailView):
+    model = Profile
+    template_name = 'autolot/profile_detail.html'
+
 class ProfileEdit(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileForm

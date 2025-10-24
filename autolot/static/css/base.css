@@ -967,6 +967,24 @@ a.btn:hover,
     color: #94a3b8; 
 }
 
+.car-owner {
+    margin-top: 6px;
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+.car-owner .profile-link {
+    color: #38bdf8;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s ease, text-shadow .2s ease;
+}
+
+.car-owner .profile-link:hover {
+    color: #7dd3fc;
+    text-shadow: 0 0 6px rgba(56,189,248,0.5);
+}
+
 @media (max-width: 700px) {
     .card-form-container { 
         flex-direction: column; 

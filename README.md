@@ -17,6 +17,7 @@ Building Echoes taught me how to combine backend logic, user authentication, and
 ### Attributions
 
 + Model Relationships – Learned to link Django models with ForeignKey and OneToOneField to connect users, profiles, and cars.
+
   ++ Using Django’s OneToOneField and signals, you can automatically create and link a Profile for each new User. This ensures every user has a corresponding profile without needing manual setup, keeping your data consistent and relationships clean.
   
   ***Example***
@@ -35,6 +36,7 @@ Building Echoes taught me how to combine backend logic, user authentication, and
   For more information on OneToOneField vs ForeignKey vs ManyToMany, visit [Understanding Django Relationships](https://dev.to/highcenburg/understanding-django-relationships-onetoonefield-vs-foreignkey-vs-manytomanyfield-4ifh).
 
 + API Integration - Integrated auto.dev API to automatically retrieve car details (make, model, year, and trim) by VIN
+
   ++ Used the requests library to make authenticated GET requests and parse the returned JSON into Django models.
   
   ***Example***
@@ -54,10 +56,12 @@ Building Echoes taught me how to combine backend logic, user authentication, and
         result = response.json()
         print(result)
   
+
   ++ Handled cases where VINs were invalid or data was missing using graceful error messages and validation logic.
     For more information on Auto.dev API, visit [Auto.dev API Documentation](https://docs.auto.dev/v2).
 
 + User Authentication & Profiles – Implemented registration, login/logout, and profile pages that dynamically show each user’s vehicles.
+
   ++ By combining Django’s built-in authentication system (registration, login/logout) with model relationships (linking vehicles to users via ForeignKey), you can create personalized profile pages that dynamically display each user’s associated items (e.g., cars) in a secure and maintainable way.
 
   ***Example***
@@ -76,6 +80,7 @@ Building Echoes taught me how to combine backend logic, user authentication, and
   For more information on User Authentication & Profiles, visit [How to USe a Foreign Key in Django](https://www.freecodecamp.org/news/how-to-use-a-foreign-key-in-django/) and [User Authentication System using Django](https://www.geeksforgeeks.org/python/user-authentication-system-using-django/).
 
 + Form Handling – Built custom ModelForms to validate user input and connect seamlessly with API responses.
+
   ++ Using a `ModelForm` ties your form fields and validation to your data model, and combining that with custom validation and an eternal API-data allows you to handle user input more safely.
 
   ***Example***
@@ -100,6 +105,7 @@ Building Echoes taught me how to combine backend logic, user authentication, and
     For more information on Form Handling, visit [django docs: ModelForm](https://docs.djangoproject.com/en/5.2/topics/forms/modelforms/).
 
 + Media & File Uploads – Added functionality for users to upload and manage car images and profile photos.
+
   ++ By using Django’s built-in ImageField/FileField on models, configuring MEDIA_ROOT/MEDIA_URL, and handling the uploaded files via request.FILES in forms and views, you can enable users to upload and manage images (for example profile photos and car pictures) in a secure and maintainable way.
 
   ***Example***

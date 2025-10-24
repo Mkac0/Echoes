@@ -1,1 +1,1 @@
-web: gunicorn echoes.wsgi
+web: gunicorn Echoes.wsgi

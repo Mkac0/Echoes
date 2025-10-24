@@ -1,0 +1,321 @@
+[
+{
+  "model": "autolot.profile",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "name": "Melissa Abreu",
+    "dealership_name": "ECHOES",
+    "bio": "",
+    "avatar": "avatars/user_2/IMG_2124_3WPJf9D.jpeg"
+  }
+},
+{
+  "model": "autolot.profile",
+  "pk": 2,
+  "fields": {
+    "user": 3,
+    "name": "Juan Collado",
+    "dealership_name": "Punta Cana Auto Sale",
+    "bio": "",
+    "avatar": "avatars/user_3/IMG_2296.jpeg"
+  }
+},
+{
+  "model": "autolot.car",
+  "pk": 1,
+  "fields": {
+    "owner": null,
+    "make": "Chevrolet",
+    "model": "Silverado 1500",
+    "trim": "",
+    "year": 2022,
+    "vin": "3GCUDHEL3NG668790",
+    "mileage": 12000,
+    "price": "50000.00",
+    "condition": "Used",
+    "status": "available"
+  }
+},
+{
+  "model": "autolot.car",
+  "pk": 2,
+  "fields": {
+    "owner": 2,
+    "make": "Ford",
+    "model": "F-150",
+    "trim": "XLT",
+    "year": 2023,
+    "vin": "1FTEW1CP9PKE30564",
+    "mileage": 30000,
+    "price": "25000.00",
+    "condition": "Used",
+    "status": "available"
+  }
+},
+{
+  "model": "autolot.car",
+  "pk": 3,
+  "fields": {
+    "owner": 2,
+    "make": "Chevrolet",
+    "model": "Equinox",
+    "trim": "LT",
+    "year": 2018,
+    "vin": "3GNAXKEV3JL123456",
+    "mileage": 102200,
+    "price": "5500.00",
+    "condition": "Used",
+    "status": "available"
+  }
+},
+{
+  "model": "autolot.car",
+  "pk": 4,
+  "fields": {
+    "owner": 2,
+    "make": "Honda",
+    "model": "Accord",
+    "trim": "",
+    "year": 2003,
+    "vin": "1HGCM82633A004352",
+    "mileage": 15000,
+    "price": "15000.00",
+    "condition": "Used",
+    "status": "available"
+  }
+},
+{
+  "model": "autolot.car",
+  "pk": 5,
+  "fields": {
+    "owner": 2,
+    "make": "Hyundai",
+    "model": "SONATA",
+    "trim": "",
+    "year": 2010,
+    "vin": "5NPE24AF4FH123456",
+    "mileage": 102500,
+    "price": "3500.00",
+    "condition": "Used",
+    "status": "pending"
+  }
+},
+{
+  "model": "autolot.car",
+  "pk": 6,
+  "fields": {
+    "owner": 3,
+    "make": "Ford",
+    "model": "F-150",
+    "trim": "",
+    "year": 2014,
+    "vin": "1FTFW1EF1EFA12345",
+    "mileage": 98002,
+    "price": "6700.00",
+    "condition": "Used",
+    "status": "available"
+  }
+},
+{
+  "model": "autolot.car",
+  "pk": 7,
+  "fields": {
+    "owner": 3,
+    "make": "Dodge",
+    "model": "Charger",
+    "trim": "",
+    "year": 2015,
+    "vin": "2C3CDXHG3FH123456",
+    "mileage": 78322,
+    "price": "7700.00",
+    "condition": "Used",
+    "status": "available"
+  }
+},
+{
+  "model": "autolot.car",
+  "pk": 8,
+  "fields": {
+    "owner": 2,
+    "make": "Chevrolet",
+    "model": "Tahoe",
+    "trim": "",
+    "year": 2004,
+    "vin": "1GNEK13Z64R123456",
+    "mileage": 89077,
+    "price": "4200.00",
+    "condition": "Used",
+    "status": "available"
+  }
+},
+{
+  "model": "autolot.car",
+  "pk": 9,
+  "fields": {
+    "owner": 3,
+    "make": "Honda",
+    "model": "Accord",
+    "trim": "",
+    "year": 2003,
+    "vin": "1HGCM82633A123456",
+    "mileage": 74880,
+    "price": "5300.00",
+    "condition": "Used",
+    "status": "available"
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 5,
+  "fields": {
+    "car": 2,
+    "image": "cars/123403-4c205457f9c64ad53fe4403adf94df0d.jpeg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 6,
+  "fields": {
+    "car": 2,
+    "image": "cars/maxresdefault.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 7,
+  "fields": {
+    "car": 3,
+    "image": "cars/IMG_2982.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 8,
+  "fields": {
+    "car": 3,
+    "image": "cars/2018-chevrolet-equinox-fwd-lt-2-0t-review-giddy-up_1.webp",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 10,
+  "fields": {
+    "car": 3,
+    "image": "cars/8fc7fc2a5d_800.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 11,
+  "fields": {
+    "car": 5,
+    "image": "cars/20210420184940496_IMG_5595.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 12,
+  "fields": {
+    "car": 5,
+    "image": "cars/2010_hyundai_sonata_dashboard.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 13,
+  "fields": {
+    "car": 5,
+    "image": "cars/2009_hyundai_sonata_sedan_limited-v6_i_oem_1_500.avif",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 14,
+  "fields": {
+    "car": 7,
+    "image": "cars/20190627200544631_2015_dodge_charger-pic-9113713874019066975-1024x768.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 15,
+  "fields": {
+    "car": 7,
+    "image": "cars/charger-and-challenger-hellcat-on-track-back-silver-1500x1000.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 16,
+  "fields": {
+    "car": 6,
+    "image": "cars/new-2014-ford-f150_supercrew_cab-xltpickup4d512ft-13101-20756215-1-640.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 17,
+  "fields": {
+    "car": 6,
+    "image": "cars/20210313222912309_20210313_124651.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 19,
+  "fields": {
+    "car": 4,
+    "image": "cars/20230712225528361_IMG_7144.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 20,
+  "fields": {
+    "car": 4,
+    "image": "cars/HondaAccord.jpeg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 21,
+  "fields": {
+    "car": 9,
+    "image": "cars/img-1-600x400.avif",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 22,
+  "fields": {
+    "car": 9,
+    "image": "cars/maxresdefault_HyrHjcK.jpg",
+    "caption": null
+  }
+},
+{
+  "model": "autolot.carphoto",
+  "pk": 23,
+  "fields": {
+    "car": 9,
+    "image": "cars/honda-accord-sedan-usa-version-2003-338217.jpg",
+    "caption": null
+  }
+}
+]

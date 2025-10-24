@@ -718,7 +718,9 @@ a:hover {
     text-align: center;
 }
 
-.xrow { margin-bottom: 14px; }
+.xrow { 
+    margin-bottom: 14px; 
+}
 
 .xrow .xlabel {
     display: inline-block;
@@ -930,6 +932,39 @@ a.btn,
 a.btn:hover,
 .btn:hover {
     text-decoration: none !important;
+}
+
+.form-alert.error {
+    color: #fecaca;
+    background: rgba(239,68,68,.08);
+    border: 1px solid rgba(239,68,68,.25);
+    padding: 10px 12px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.field-error {
+    color: #fecaca;
+    background: rgba(239,68,68,.06);
+    border: 1px solid rgba(239,68,68,.25);
+    padding: 8px 10px;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+.help-list {
+    margin: 6px 0 12px;
+    padding-left: 18px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.help-list li { 
+    margin: 4px 0; 
+}
+
+.help { 
+    color: #94a3b8; 
 }
 
 @media (max-width: 700px) {

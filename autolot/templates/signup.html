@@ -1,19 +1,42 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="page-header">
-    <h1>Sign Up</h1>
-</div>
-{% if error_message %}
-    <p class="red-text">{{ error_message }}</p>
-{% endif %}
-<form action="" method="post" class="form-container" autocomplete="off">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <button type="submit" class="btn submit">Submit!</button>
-</form>
-
+<section class="auth-section">
+    <form action="{% url 'signup' %}" method="post" class="auth-card" autocomplete="off">
+        <h1>Create an account</h1>
+        {% csrf_token %}
+        {% if error_message %}
+            <p class="form-alert error">{{ error_message }}</p>
+        {% endif %}
+        {% if form.non_field_errors %}
+            <p class="form-alert error">{{ form.non_field_errors }}</p>
+        {% endif %}
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+            <p class="field-error">{{ form.username.errors.0 }}</p>
+        {% endif %}
+        <label for="{{ form.password1.id_for_label }}">Password</label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            <p class="field-error">{{ form.password1.errors.0 }}</p>
+        {% endif %}
+        {% if form.password1.help_text %}
+            <ul class="help-list">{{ form.password1.help_text|safe }}</ul>
+        {% endif %}
+        <label for="{{ form.password2.id_for_label }}">Confirm password</label>
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+            <p class="field-error">{{ form.password2.errors.0 }}</p>
+        {% endif %}
+        {% if form.password2.help_text %}
+            <small class="help">{{ form.password2.help_text }}</small>
+        {% endif %}
+        <button type="submit" class="btn btn-primary full-width">Create account</button>
+        <div class="auth-footer">
+            Already have an account? <a href="{% url 'home' %}">Log in</a>
+        </div>
+    </form>
+</section>
 {% endblock %}

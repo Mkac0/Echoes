@@ -11,37 +11,30 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 from dotenv import load_dotenv
 import dj_database_url
 
-load_dotenv()
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 load_dotenv(BASE_DIR / '.env')
 
-AUTO_DEV_API_KEY = os.getenv('AUTO_DEV_API_KEY', '')
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 
+AUTO_DEV_API_KEY = os.getenv('AUTO_DEV_API_KEY', '')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    os.getenv("HEROKU_APP_NAME", "") + ".herokuapp.com",
-]
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["*"]
+HEROKU_APP = os.getenv("HEROKU_APP_NAME", "")
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+if HEROKU_APP:
+    ALLOWED_HOSTS.append(f"{HEROKU_APP}.herokuapp.com")
+if DEBUG:
+    ALLOWED_HOSTS.append("*")
 
 
 # Application definition
@@ -91,21 +84,19 @@ WSGI_APPLICATION = 'Echoes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-if 'ON_HEROKU' in os.environ:
-    DEBUG = True
+if os.getenv("DATABASE_URL"):
     DATABASES = {
-        "default": dj_database_url.config(
-            env='DATABASE_URL',
+        "default": dj_database_url.parse(
+            os.environ["DATABASE_URL"],
             conn_max_age=600,
-            conn_health_checks=True,
             ssl_require=True,
-        ),
+        )
     }
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 
@@ -146,6 +137,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOGIN_URL = 'home'
 

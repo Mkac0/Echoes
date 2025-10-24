@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Delete Car</h1>
-<p>Are you sure you want to delete "{{ object }}"?</p>
-<form method="post">
+<h1>Delete Photo</h1>
+<p>Are you sure you want to delete this photo?</p>
+<img src="{{ object.image.url }}" alt="Photo" style="max-width:240px;border-radius:10px;">
+<form method="post" class="action-links right" style="margin-top:14px">
     {% csrf_token %}
-        <button type="submit">Yes, delete</button>
-        <a href="{% url 'car-detail' object.pk %}">Cancel</a>
+    <button type="submit" class="btn btn-delete">Yes, delete</button>
+    <a class="btn" href="{% url 'car-detail' object.car_id %}">Cancel</a>
 </form>
 {% endblock %}

@@ -50,3 +50,9 @@ class CarPhotoForm(forms.ModelForm):
     class Meta:
         model = CarPhoto
         fields = ['image', 'caption']
+
+class CarPhotoEditForm(forms.ModelForm):
+    image = forms.ImageField(required=False)
+    class Meta:
+        model = CarPhoto
+        fields = ["image", "caption"]

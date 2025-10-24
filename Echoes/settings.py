@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(BASE_DIR / '.env')
 
-AUTO_DEV_API_KEY = os.getenv('AUTO_DEV_API_KEY')
+AUTO_DEV_API_KEY = os.getenv('AUTO_DEV_API_KEY', '')
 
 
 # Quick-start development settings - unsuitable for production

@@ -34,12 +34,19 @@
         {% for p in object.photos.all %}
             <figure class="photo-item">
                 <img src="{{ p.image.url }}" alt="{{ p.caption|default:object.make }}">
-                {% if p.caption %}
-                    <figcaption>{{ p.caption }}</figcaption>
+                {% if p.caption %}<figcaption>{{ p.caption }}</figcaption>{% endif %}
+                {% if request.user.is_authenticated and request.user == object.owner %}
+                    <div class="photo-actions">
+                        <a class="btn btn-sm" href="{% url 'carphoto-update' p.pk %}">Edit</a>
+                        <form method="post" action="{% url 'carphoto-delete' p.pk %}" onsubmit="return confirm('Delete this photo?');">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-delete" type="submit">Delete</button>
+                        </form>
+                    </div>
                 {% endif %}
             </figure>
         {% empty %}
-            <p class="meta">No photos have been uploaded yet.</p>
+            <p class="meta">No photos uploaded yet.</p>
         {% endfor %}
     </div>
     {% if request.user.is_authenticated %}

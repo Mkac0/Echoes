@@ -795,6 +795,20 @@ a:hover {
     margin-left: 6px; 
 }
 
+.photo-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.btn-sm {
+    height: 28px;
+    padding: 0 10px;
+    font-size: .85rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+}
 
 @media (max-width: 700px) {
     .card-form-container { 

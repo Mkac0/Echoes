@@ -1,21 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Add Photo</h1>
+<h1>{% if form.instance.pk %}Edit Photo{% else %}Add Photo{% endif %}</h1>
 
-<h3>Upload from your computer</h3>
-<form class="card" method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" class="card form-card">
     {% csrf_token %}
+    {% if form.instance.pk and form.instance.image %}
+        <div style="margin-bottom:10px">
+            <img src="{{ form.instance.image.url }}" alt="Current photo" style="max-width:220px;border-radius:10px;">
+        </div>
+    {% endif %}
     {{ form.as_p }}
-    <div class="action-links">
-        <button class="btn-primary" type="submit">Upload</button>
-        <a lass="btn" href="{% url 'car-detail' view.kwargs.pk %}">Cancel</a>
+    <div class="action-links right">
+        <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Save{% else %}Upload{% endif %}</button>
+        <a href="{% url 'car-detail' form.instance.car_id|default:view.kwargs.pk %}" class="btn">Cancel</a>
     </div>
 </form>
+
+{% if not form.instance.pk %}
 <hr>
 <h3>Or import default</h3>
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="import_api" value="1">
-    <button class="btn-secondary" type="submit">Import</button>
+    <button type="submit" class="btn btn-primary">Import from API</button>
 </form>
+{% endif %}
+
 {% endblock %}

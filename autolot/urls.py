@@ -16,4 +16,6 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     path('profile/', views.ProfileDetail.as_view(), name='profile-detail'),
     path('profile/edit/', views.ProfileEdit.as_view(), name='profile-edit'),
+    path("cars/photos/<int:pk>/edit/", views.CarPhotoUpdate.as_view(), name="carphoto-update"),
+    path("cars/photos/<int:pk>/delete/", views.CarPhotoDelete.as_view(), name="carphoto-delete"),
 ]

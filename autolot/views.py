@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.db.models import Q
 from .models import Car, CustomerLead, CarPhoto
 from .forms import CarForm, CustomerLeadForm, CarPhotoForm
@@ -13,7 +13,7 @@ from django.contrib import messages
 from django.core.files.base import ContentFile
 from .services import fetch_retail_photo_urls_by_vin
 from .models import Profile
-from .forms import ProfileForm, UserAccountForm
+from .forms import ProfileForm, UserAccountForm, CarPhotoEditForm
 
 class Home(LoginView):
     template_name = 'home.html'
@@ -152,3 +152,27 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'signup.html', context)
+
+class CarPhotoUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = CarPhoto
+    form_class = CarPhotoEditForm
+    template_name = "autolot/carphoto_form.html"
+    def test_func(self):
+        return self.get_object().car.owner == self.request.user
+    def get_success_url(self):
+        return reverse("car-detail", args=[self.object.car_id])
+
+class CarPhotoDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = CarPhoto
+    template_name = "autolot/carphoto_confirm_delete.html"
+    def test_func(self):
+        return self.get_object().car.owner == self.request.user
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        storage, path = obj.image.storage, obj.image.name
+        response = super().delete(request, *args, **kwargs)
+        if path:
+            storage.delete(path)
+        return response
+    def get_success_url(self):
+        return reverse("car-detail", args=[self.object.car_id])

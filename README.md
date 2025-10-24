@@ -132,6 +132,6 @@ Building Echoes taught me how to combine backend logic, user authentication, and
 
 ### Next Steps
 Planned features and stretch goals:
-- Add an Admin/Lead user
+- Add an Admin/Lead user (to manage who is allowed to use the app & avoid scammers)
 - Include "Send seller message" throught the App
 - Include car detail notes/comments to elaborate on the condition of the car

@@ -1691,3 +1691,21 @@ body:not(.light-mode) .switch-label {
 .content-main {
     padding-top: 4px;
 }
+
+.theme-toggle-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+}
+
+.light-mode .theme-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.07);
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}

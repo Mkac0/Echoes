@@ -2,50 +2,85 @@
 {% block content %}
 
 <h1>Inventory</h1>
-<form class="card-form-container" method="get">
-    <input type="text" name="query" placeholder="Search VIN" value="{{ request.GET.query }}">
-    <div class="search-actions">
-        <select name="status">
-        <option value="">Any</option>
-        {% for key,label in object_list.model.Status.choices %}
-            <option value="{{ key }}" {% if request.GET.status == key %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
-        </select>
-        <div class="inventory-action-btn">
-            <button class="btn-primary" type="submit">Filter</button>
-            <a href="{% url 'car-create' %}" class="btn-primary">Add Car</a>
-        </div>
-    </div>
-</form>
-<section class="cards">
-    {% for car in object_list %}
-    <a href="{% url 'car-detail' car.pk %}" class="card card-link">
-        <div class="card-image-container">
-            {% if car.photos.all %}
-                {% with first_photo=car.photos.all.0 %}
-                <img src="{{ first_photo.image.url }}" alt="{{ car.year }} {{ car.make }} {{ car.model }} Photo" class="card-car-img" 
-                    data-current-index="0" 
-                    data-photo-urls="{% for photo in car.photos.all %}{{ photo.image.url }}{% if not forloop.last %}|{% endif %}{% endfor %}">
-                
-                {% if car.photos.count > 1 %}
-                <button class="card-back-btn" type="button" aria-label="Previous Image">&#10094;</button>
-                <button class="card-next-btn" type="button" aria-label="Next Image">&#10095;</button>
-                {% endif %}
-                {% endwith %}
-            {% else %}
-                <div class="no-images-placeholder">No images yet</div>
-            {% endif %}
-        </div>
-        <h3>{{ car.year }} {{ car.make }} {{ car.model }}</h3>
-        <p class="meta">
-            VIN: <strong>{{ car.vin }}</strong> &nbsp;&bull;&nbsp;
-            ${{ car.price }} &nbsp;&bull;&nbsp;
-            <span class="status-{{ car.status }}">{{ car.get_status_display }}</span>
-        </p>
-    </a>
-    {% empty %}
-        <p class="meta">No cars yet.</p>
-    {% endfor %}
-</section>
+<div class="layout-sidebar">
+    <aside class="filters-sidebar">
+        <form class="filters-form" method="get">
+            <h2>Filters</h2>
+            <label class="filter-label">
+                Search VIN
+                <input
+                    type="text"
+                    name="query"
+                    placeholder="Search VIN"
+                    value="{{ request.GET.query }}"
+                >
+            </label>
+            <div class="filter-label">
+                Status
+                <div class="segmented-control" role="tablist">
+                    <button
+                        type="submit"
+                        name="status"
+                        value=""
+                        class="segment-button {% if not request.GET.status %}is-active{% endif %}"
+                    >
+                        All
+                    </button>
+                    {% for key, label in object_list.model.Status.choices %}
+                        <button
+                            type="submit"
+                            name="status"
+                            value="{{ key }}"
+                            class="segment-button {% if request.GET.status == key %}is-active{% endif %}"
+                        >
+                            {{ label }}
+                        </button>
+                    {% endfor %}
+                </div>
+            </div>
+            <button class="btn btn-primary full-width" type="submit">
+                Apply
+            </button>
+            <a href="{% url 'car-create' %}" class="btn btn-primary full-width mt-4">
+                Add Car
+            </a>
+        </form>
+    </aside>
+    <section class="content-main">
+        <section class="cards">
+            {% for car in object_list %}
+                <a href="{% url 'car-detail' car.pk %}" class="card card-link">
+                    <div class="card-image-container">
+                        {% if car.photos.all %}
+                            {% with first_photo=car.photos.all.0 %}
+                                <img
+                                    src="{{ first_photo.image.url }}"
+                                    alt="{{ car.year }} {{ car.make }} {{ car.model }} Photo"
+                                    class="card-car-img"
+                                    data-current-index="0"
+                                    data-photo-urls="{% for photo in car.photos.all %}{{ photo.image.url }}{% if not forloop.last %}|{% endif %}{% endfor %}"
+                                >
+                                {% if car.photos.count > 1 %}
+                                    <button class="card-back-btn" type="button" aria-label="Previous Image">&#10094;</button>
+                                    <button class="card-next-btn" type="button" aria-label="Next Image">&#10095;</button>
+                                {% endif %}
+                            {% endwith %}
+                        {% else %}
+                            <div class="no-images-placeholder">No images yet</div>
+                        {% endif %}
+                    </div>
+                    <h3>{{ car.year }} {{ car.make }} {{ car.model }}</h3>
+                    <p class="meta">
+                        VIN: <strong>{{ car.vin }}</strong> &nbsp;&bull;&nbsp;
+                        ${{ car.price }} &nbsp;&bull;&nbsp;
+                        <span class="status-{{ car.status }}">{{ car.get_status_display }}</span>
+                    </p>
+                </a>
+            {% empty %}
+                <p class="meta">No cars yet.</p>
+            {% endfor %}
+        </section>
+    </section>
+</div>
 
 {% endblock %}

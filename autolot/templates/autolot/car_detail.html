@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static humanize %}
 {% block content %}
 
 <div class="car-detail-container">
@@ -16,7 +17,8 @@
     </div>
     <div class="car-meta">
         <div class="meta-item"><span>Mileage:</span> {{ object.mileage|default:"N/A" }}</div>
-        <div class="meta-item"><span>Price:</span> ${{ object.price|default:"0.00" }}</div>
+        <div class="meta-item"><span>Price:</span> ${{ object.price|floatformat:2|intcomma|default:"0.00" }}</div>
+        <div class="meta-item"><span>Cash Down:</span> ${{ object.cash_down|floatformat:2|intcomma|default:"0.00" }}</div>
         <div class="meta-item"><span>Condition:</span> {{ object.condition|default:"Used" }}</div>
         <div class="meta-item">
             <span>Status:</span> 

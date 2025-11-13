@@ -10,7 +10,7 @@ class CarForm(forms.ModelForm):
 
     class Meta:
         model = Car
-        fields = ['vin', 'year', 'make', 'model', 'trim', 'mileage', 'price', 'condition', 'status']
+        fields = ['vin', 'year', 'make', 'model', 'trim', 'mileage', 'price', 'cash_down', 'condition', 'status']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

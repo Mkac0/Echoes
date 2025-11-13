@@ -29,7 +29,8 @@ class Car(models.Model):
     year = models.PositiveIntegerField(validators=[MinValueValidator(1900)])
     vin = models.CharField('VIN', max_length=17, unique=True)
     mileage = models.PositiveBigIntegerField(default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, validators=[MinValueValidator(0)])
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, null=True, blank=True, validators=[MinValueValidator(0)])
+    cash_down = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     condition = models.CharField(max_length=20, default='Used', blank=True)
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.AVAILABLE)
     def __str__(self):

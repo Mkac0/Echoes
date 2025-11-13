@@ -44,6 +44,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'autolot',
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -156,6 +157,8 @@ LOGOUT_REDIRECT_URL = '/cars/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
+
+USE_L10N = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

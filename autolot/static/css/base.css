@@ -118,7 +118,7 @@ nav button:hover {
     box-shadow: 0 10px 25px rgba(0,0,0,.4);
     padding: 2rem 2.5rem;
     width: 100%;
-    max-width: 420px;
+    max-width: 620px;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -1592,6 +1592,9 @@ body.light-mode .filters-form {
     .filters-sidebar {
         position: static;
         order: -1;
+    }
+    .auth-card {
+        max-width: 560px;
     }
 }
 

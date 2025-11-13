@@ -34,6 +34,11 @@
                             <li><a href="{% url 'home' %}">Login</a></li>
                             <li><a href="{% url 'signup' %}">Sign Up</a></li>
                         {% endif %}
+                        <li>
+                            <button id="theme-toggle" type="button" aria-label="Toggle light and dark mode">
+                                Switch to Light Mode
+                            </button>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -49,5 +54,6 @@
             {% endif %}
         {% endblock %}
         </main>
+        <script src="{% static 'js/theme.js' %}"></script> </body>
     </body>
 </html>

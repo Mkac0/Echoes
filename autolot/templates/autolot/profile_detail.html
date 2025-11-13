@@ -30,6 +30,23 @@
 <section class="cards">
     {% for car in cars %}
         <a href="{% url 'car-detail' car.pk %}" class="card card-link">
+            <div class="card-image-container">
+                {% if car.photos.first %}
+                    <img
+                        src="{{ car.photos.first.image.url }}"
+                        class="card-car-img"
+                        data-photo-urls="{% for photo in car.photos.all %}{{ photo.image.url }}{% if not forloop.last %}|{% endif %}{% endfor %}"
+                        data-current-index="0"
+                        alt="{{ car.year }} {{ car.make }} {{ car.model }}"
+                    >
+                {% else %}
+                    <div class="no-images-placeholder">No images yet</div>
+                {% endif %}
+
+                <button class="card-back-btn" type="button">&#x2039;</button>
+                <button class="card-next-btn" type="button">&#x203A;</button>
+            </div>
+
             <h3>{{ car.year }} {{ car.make }} {{ car.model }}</h3>
             <p class="meta">
                 VIN: <strong>{{ car.vin }}</strong> &nbsp;&bull;&nbsp;

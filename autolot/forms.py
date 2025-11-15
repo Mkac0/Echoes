@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User as AuthUser
+import requests # Import requests to handle potential API errors
 from .models import Profile, Car, CarPhoto, CustomerLead
 from .services import fetch_vehicle_by_vin
 
@@ -23,14 +24,28 @@ class CarForm(forms.ModelForm):
     def clean(self):
         cleaned = super().clean()
         vin = cleaned.get('vin')
+        
         if vin:
-            data = fetch_vehicle_by_vin(vin) or {}
+            try:
+                data = fetch_vehicle_by_vin(vin) or {}
+            except requests.exceptions.RequestException as e:
+                print(f"Warning: VIN lookup failed due to API error: {e}")
+                data = {}
+
             cleaned['make']  = cleaned.get('make')  or data.get('make')
             cleaned['model'] = cleaned.get('model') or data.get('model')
             cleaned['year']  = cleaned.get('year')  or data.get('year')
-        for field in ['vin', 'year', 'mileage']:
-            if not cleaned.get(field):
-                self.add_error(field, f'{field.title()} is required.')
+        
+        required_fields = ['vin', 'year', 'mileage', 'model'] 
+        
+        for field in required_fields:
+            value = cleaned.get(field)
+            if not value:
+                if field == 'model':
+                    self.add_error(field, 'The model is required. Please enter it manually or check the VIN.')
+                else:
+                    self.add_error(field, f'{field.title()} is required.')
+
         return cleaned
 
 class ProfileForm(forms.ModelForm):

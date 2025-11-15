@@ -18,7 +18,7 @@
         {% else %}
             <div class="xrow">
             <label class="xlabel" for="{{ field.id_for_label }}">
-                {{ field.label }}{% if field.name in 'vin year mileage' %}<span class="xreq" title="Required">*</span>{% endif %}
+                {{ field.label }}{% if field.name in 'vin year model mileage' %}<span class="xreq" title="Required">*</span>{% endif %}
             </label>
             {{ field }}
             {% if field.help_text %}<small class="xhelp">{{ field.help_text }}</small>{% endif %}

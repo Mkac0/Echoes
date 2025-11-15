@@ -23,7 +23,7 @@ class Car(models.Model):
         PENDING = 'pending', 'Pending'
         SOLD = 'sold', 'Sold'
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
-    make = models.CharField(max_length=50, blank=True, default='')
+    make = models.CharField(max_length=50, null=True, blank=True, default='')
     model = models.CharField(max_length=50, blank=True, default='')
     trim = models.CharField(max_length=50, blank=True, default='')
     year = models.PositiveIntegerField(validators=[MinValueValidator(1900)])

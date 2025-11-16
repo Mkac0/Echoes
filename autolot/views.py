@@ -23,13 +23,16 @@ class ProfileDetail(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = 'autolot/profile_detail.html'
     def get_object(self, queryset=None):
-        return self.request.user.profile
+        profile, _ = Profile.objects.get_or_create(user=self.request.user)
+        return profile
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cars'] = (Car.objects
-                       .filter(owner=self.request.user)
-                       .select_related('owner')
-                       .order_by('-id'))
+        context['cars'] = (
+            Car.objects
+               .filter(owner=self.request.user)
+               .select_related('owner')
+               .order_by('-id')
+        )
         return context
 
 class ProfilePublicDetail(DetailView):
@@ -68,7 +71,8 @@ class ProfileEdit(LoginRequiredMixin, UpdateView):
     template_name = 'autolot/profile_form.html'
     success_url = reverse_lazy('profile-detail')
     def get_object(self, queryset=None):
-        return self.request.user.profile
+        profile, _ = Profile.objects.get_or_create(user=self.request.user)
+        return profile
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.method == 'POST':
@@ -183,6 +187,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            Profile.objects.create(user=user)
             login(request, user)
             return redirect('car-list')
         else:

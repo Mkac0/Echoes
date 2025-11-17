@@ -44,6 +44,8 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'autolot',
+    'cloudinary',
+    'cloudinary_storage',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -164,3 +166,5 @@ USE_L10N = True
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

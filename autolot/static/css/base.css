@@ -1789,12 +1789,6 @@ main.container {
     }
 }
 
-@media (max-width: 480px) {
-    .navbar-btn li:not(:first-child) {
-        display: none;
-    }
-}
-
 /* --- Mobile navbar dropdown --- */
 
 .nav-mobile-toggle {

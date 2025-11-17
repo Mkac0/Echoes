@@ -28,7 +28,7 @@
           >
             ☰
           </button>
-          <ul class="navbar-btn">
+          <ul class="navbar-btn" id="primary-nav">
             {% if user.is_authenticated %}
               <li><a href="{% url 'car-list' %}">Inventory</a></li>
               <li><a href="{% url 'car-create' %}">Add Car</a></li>

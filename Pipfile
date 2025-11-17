@@ -19,6 +19,8 @@ urllib3 = "==2.5.0"
 whitenoise = "==6.11.0"
 requests = "*"
 psycopg = {extras = ["binary"], version = "==3.2.11"}
+cloudinary = "*"
+django-cloudinary-storage = "*"
 
 [dev-packages]
 

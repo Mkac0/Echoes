@@ -190,12 +190,13 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            Profile.objects.create(user=user)
+            Profile.objects.get_or_create(user=user)
             login(request, user)
             return redirect('car-list')
         else:
             error_message = 'Invalid - try again'
-    form = UserCreationForm()
+    else:
+        form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'signup.html', context)
 

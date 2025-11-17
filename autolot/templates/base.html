@@ -3,58 +3,71 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-        <title>Echoes</title>
-        {% block head %} 
-        {% endblock %}
-    </head>
-    <body>
-        <header>
-            <div>
-                <div class="header-logo-container">
-                    <h1>Echoes</h1>
-                </div>
-                <nav>
-                    <ul class="navbar-btn">
-                        {% if user.is_authenticated %}
-                            <li><a href="{% url 'car-list' %}">Inventory</a></li>
-                            <li><a href="{% url 'car-create' %}">Add Car</a></li>
-                            <li><a href="{% url 'profile-detail' %}">Profile</a></li>
-                            <li>
-                                <form id="logout-form" method="post" action="{% url 'logout' %}">
-                                    {% csrf_token %}
-                                    <button type="submit">Log out</button>
-                                </form>
-                            </li>
-                        {% else %}
-                            <li><a href="{% url 'car-list' %}">Inventory</a></li>
-                            <li><a href="{% url 'home' %}">Login</a></li>
-                            <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                        {% endif %}
-                        <li>
-                            <button id="theme-toggle" type="button" class="theme-toggle-btn" aria-label="Toggle light/dark mode">
-                                <span id="theme-icon">🌙</span>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <main class="container">
-        {% block content %} 
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li class="{{ message.tags }}">{{ message }}</li>
-                    {% endfor %}
-                </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <title>Echoes</title>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      <div>
+        <div class="header-logo-container">
+          <h1>Echoes</h1>
+        </div>
+        <nav>
+          <ul class="navbar-btn">
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'car-list' %}">Inventory</a></li>
+              <li><a href="{% url 'car-create' %}">Add Car</a></li>
+              <li><a href="{% url 'profile-detail' %}">Profile</a></li>
+              <li>
+                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                  {% csrf_token %}
+                  <button type="submit">Log out</button>
+                </form>
+              </li>
+            {% else %}
+              <li><a href="{% url 'car-list' %}">Inventory</a></li>
+              <li><a href="{% url 'home' %}">Login</a></li>
+              <li><a href="{% url 'signup' %}">Sign Up</a></li>
             {% endif %}
-        {% endblock %}
-        </main>
-        <script src="{% static 'js/theme.js' %}"></script> </body>
-    </body>
+            <li>
+              <button id="theme-toggle" type="button" class="theme-toggle-btn" aria-label="Toggle light/dark mode">
+                <span id="theme-icon">🌙</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      {% block content %}
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-copy">
+          © {% now "Y" %} Echoes. All rights reserved.
+        </p>
+        <div class="footer-contact">
+          <span>Contact us:</span>
+          <a href="mailto:support@echoesapp.test">support@echoesapp.test</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static 'js/theme.js' %}"></script>
+  </body>
 </html>

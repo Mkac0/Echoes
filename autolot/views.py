@@ -18,6 +18,9 @@ from .forms import ProfileForm, UserAccountForm, CarPhotoEditForm
 
 class Home(LoginView):
     template_name = 'home.html'
+    redirect_authenticated_user = True
+    def get_success_url(self):
+        return reverse_lazy('car-list')
 
 class ProfileDetail(LoginRequiredMixin, DetailView):
     model = Profile

@@ -92,3 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', (event) => cycleImage(event, 'prev'));
     });
 });
+
+(function () {
+    const menuToggle = document.getElementById('nav-mobile-toggle');
+    const navList = document.getElementById('primary-nav');
+
+    if (!menuToggle || !navList) return;
+
+    menuToggle.addEventListener('click', () => {
+        const isOpen = navList.classList.toggle('nav-open');
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+})();

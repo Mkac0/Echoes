@@ -1772,3 +1772,107 @@ body.light-mode .footer-contact a {
 main.container {
     flex: 1 0 auto;
 }
+
+@media (max-width: 600px) {
+    header nav ul.navbar-btn li a,
+    header nav ul.navbar-btn li button {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.4rem;
+    }
+
+    header nav ul.navbar-btn {
+        gap: 0.5rem;
+    }
+
+    header nav ul.navbar-btn {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-btn li:not(:first-child) {
+        display: none;
+    }
+}
+
+/* --- Mobile navbar dropdown --- */
+
+.nav-mobile-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    color: #e5e7eb;
+    font-size: 1.3rem;
+    padding: 6px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.nav-mobile-toggle:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+body.light-mode .nav-mobile-toggle {
+    color: #111827;
+}
+
+body.light-mode .nav-mobile-toggle:hover {
+    background: rgba(0,0,0,0.06);
+}
+
+@media (max-width: 700px) {
+    header > div {
+        padding: 10px 14px;
+    }
+
+    nav {
+        width: 100%;
+        justify-content: flex-end;
+        position: relative;
+    }
+
+    .nav-mobile-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+    }
+
+    .navbar-btn {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        margin-top: 8px;
+        padding: 10px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        border-radius: 14px;
+        background: rgba(15,23,42,0.98);
+        border: 1px solid #1f2937;
+        box-shadow: 0 18px 30px rgba(0,0,0,0.6);
+        display: none;
+    }
+
+    body.light-mode .navbar-btn {
+        background: #ffffff;
+        border-color: #e5e7eb;
+        box-shadow: 0 12px 30px rgba(15,23,42,0.16);
+    }
+
+    .navbar-btn li {
+        width: 100%;
+    }
+
+    .navbar-btn a,
+    .navbar-btn button {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 8px 10px;
+    }
+
+    .navbar-btn.nav-open {
+        display: flex;
+    }
+}

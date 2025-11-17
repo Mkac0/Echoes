@@ -18,6 +18,16 @@
           <h1>Echoes</h1>
         </div>
         <nav>
+          <button
+            type="button"
+            class="nav-mobile-toggle"
+            id="nav-mobile-toggle"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="primary-nav"
+          >
+            ☰
+          </button>
           <ul class="navbar-btn">
             {% if user.is_authenticated %}
               <li><a href="{% url 'car-list' %}">Inventory</a></li>

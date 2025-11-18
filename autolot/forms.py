@@ -31,21 +31,15 @@ class CarForm(forms.ModelForm):
             except requests.exceptions.RequestException as e:
                 print(f"Warning: VIN lookup failed due to API error: {e}")
                 data = {}
-
             cleaned['make']  = cleaned.get('make')  or data.get('make')
             cleaned['model'] = cleaned.get('model') or data.get('model')
             cleaned['year']  = cleaned.get('year')  or data.get('year')
-        
-        required_fields = ['vin', 'year', 'mileage', 'model'] 
-        
+        required_fields = ['vin', 'year', 'mileage']
         for field in required_fields:
             value = cleaned.get(field)
             if not value:
-                if field == 'model':
-                    self.add_error(field, 'The model is required. Please enter it manually or check the VIN.')
-                else:
-                    self.add_error(field, f'{field.title()} is required.')
-
+                self.add_error(field, f'{field.title()} is required.')
+                
         return cleaned
 
 class ProfileForm(forms.ModelForm):

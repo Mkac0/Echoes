@@ -1,23 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Edit Profile</h1>
+<div class="auth-section"> <div class="form-card">
+        <h1>Edit Profile</h1>
 
-<form class="card profile-form" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <fieldset>
-        <legend>Profile</legend>
-        {{ form.as_p }}
-    </fieldset>
-    <fieldset>
-        <legend>Account</legend>
-        {{ user_form.as_p }}
-    </fieldset>
-    <div class="action-links mt-4">
-        <button type="submit" class="btn-primary">Save</button>
-        <a href="{% url 'profile-detail' %}" class="btn">Cancel</a>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <fieldset>
+                <legend>Profile Details</legend>
+                <div class="form-grid">
+                    {% for field in form %}
+                        <div class="xrow">
+                            <label class="xlabel" for="{{ field.id_for_label }}">
+                                {{ field.label }}
+                                {% if field.field.required %}<span class="xreq">*</span>{% endif %}
+                            </label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class="xhelp">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% if field.errors %}
+                                <div class="xerror">{{ field.errors|first }}</div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Account Settings</legend>
+                <div class="form-grid"> 
+                    <div class="xrow">
+                        <label class="xlabel">First Name</label>
+                        {{ user_form.first_name }}
+                    </div>
+                    <div class="xrow">
+                        <label class="xlabel">Last Name</label>
+                        {{ user_form.last_name }}
+                    </div>
+                    <div class="xrow">
+                        <label class="xlabel">Email Address</label>
+                        {{ user_form.email }}
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="action-links mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px; vertical-align: middle;">
+                        <path d="M11 2H9v3h2V2Z"/>
+                        <path d="M1.5 0h11.586a1 1 0 0 1 .707.293l1.414 1.414a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2Zm3.354 1a.5.5 0 0 0-.354.854l8 8a.5.5 0 0 0 .708-.708l-8-8a.5.5 0 0 0-.354-.146Z"/>
+                    </svg>
+                    Save Changes
+                </button>
+                <a href="{% url 'profile-detail' %}" class="btn">Cancel</a>
+            </div>
+        </form>
     </div>
-</form>
+</div>
 
 {% endblock %}
-

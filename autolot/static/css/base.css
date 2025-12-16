@@ -610,6 +610,174 @@ a:hover {
     font-size: 0.95rem;
 }
 
+.profile-form textarea, 
+.xrow:has(textarea) {
+    grid-column: 1 / -1;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    color: #e5e7eb;
+}
+
+input[type="file"] {
+    background: transparent;
+    border: 1px dashed var(--c-border);
+    padding: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+input[type="file"]:hover {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.04);
+}
+
+fieldset {
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    background: rgba(17, 24, 39, 0.3);
+}
+
+legend {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.xrow:has(input[type="file"]) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px dashed #374151;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    transition: all 0.2s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.05);
+}
+
+.xrow a[href*="media/avatars"] {
+    font-size: 0.85rem;
+    color: #38bdf8;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.xrow:has(input[type="checkbox"]) {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-grid .xrow:has(textarea),
+.form-grid .xrow:has(input[type="file"]) {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+.form-grid textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--c-border);
+    border-radius: 8px;
+    color: white;
+}
+
+body.light-mode fieldset {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+fieldset .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+    align-items: start;
+}
+
+fieldset:first-of-type .form-grid .xrow:nth-child(1),
+fieldset:first-of-type .form-grid .xrow:nth-child(2) {
+    grid-column: span 1 !important;
+}
+
+fieldset:last-of-type .form-grid .xrow:nth-child(1),
+fieldset:last-of-type .form-grid .xrow:nth-child(2) {
+    grid-column: span 1 !important;
+}
+
+.xrow:has(textarea), 
+.xrow:has(input[type="file"]) {
+    grid-column: 1 / -1 !important;
+}
+
+.btn-primary {
+    background: #0ea5e9;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #38bdf8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+}
+
+fieldset:last-of-type .form-grid .xrow:nth-child(3) {
+    grid-column: 1 / -1 !important;
+}
+
+.xrow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.xrow:has(input[name="name"]),
+.xrow:has(input[name="dealership_name"]) {
+    grid-column: span 1;
+}
+
+fieldset:first-of-type .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.xrow:has(textarea), 
+.xrow:has(input[type="file"]) {
+    grid-column: 1 / -1 !important;
+}
+
 .car-detail-container {
     max-width: 1100px;
     margin: 40px auto;
@@ -888,13 +1056,13 @@ a:hover {
 
 .form-card {
     width: 100%;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto 30px;
     background: linear-gradient(180deg, rgba(56,189,248,.06), rgba(56,189,248,0) 40%), #111827;
     border: 1px solid #1f2937;
     border-radius: 18px;
     box-shadow: 0 10px 25px rgba(0,0,0,.4);
-    padding: 24px 28px;
+    padding: 24px 38px;
 }
 
 .form-card img {

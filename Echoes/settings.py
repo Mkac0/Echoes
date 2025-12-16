@@ -45,8 +45,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'autolot',
-    'cloudinary',
-    'cloudinary_storage',
+    'storages',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -170,8 +169,15 @@ USE_L10N = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
-if CLOUDINARY_URL:
-    cloudinary.config(secure=True)
+# --- AWS S3 SETTINGS (Replace the Cloudinary section) ---
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = 'us-east-1' # Change to your bucket's region
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERIFY = True
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# This tells Django to use S3 for uploaded media
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

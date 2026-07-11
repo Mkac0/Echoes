@@ -71,3 +71,28 @@ nav button:hover {
     background: rgba(148,163,184,.12);
     text-decoration: none;
 }
+
+/* --- Mobile navbar dropdown --- */
+
+.nav-mobile-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    color: #e5e7eb;
+    font-size: 1.3rem;
+    padding: 6px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.nav-mobile-toggle:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+body.light-mode .nav-mobile-toggle {
+    color: #111827;
+}
+
+body.light-mode .nav-mobile-toggle:hover {
+    background: rgba(0,0,0,0.06);
+}

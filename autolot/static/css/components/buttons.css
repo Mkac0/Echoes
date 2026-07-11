@@ -1,0 +1,102 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 12;
+    border-radius: 12px;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    line-height: 1.2;
+}
+
+.btn:hover { 
+    background:rgba(148,163,184,.18);
+}
+
+.btn-primary {
+    background:linear-gradient(180deg, #22d3ee, #38bdf8); 
+    color:#001018;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    color:#001018;
+}
+
+.btn-primary:hover {
+    background: #38bdf8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    filter:brightness(1.05);
+}
+
+.btn-secondary { 
+    background:transparent; 
+    color: #38bdf8; 
+    border-color:rgba(56,189,248,.35);
+}
+
+.btn-secondary:hover { 
+    background:rgba(56,189,248,.08);
+}
+
+.btn-delete { 
+    background:transparent; 
+    color: #ef4444; 
+    border-color:rgba(239,68,68,.35);
+}
+
+.btn-delete:hover { 
+    background:rgba(239,68,68,.08);
+}
+
+button:active, .btn:active { 
+    transform:translateY(1px);
+}
+
+.edit-btn {
+    background: linear-gradient(180deg, #22d3ee, #38bdf8);
+    color: #001018;
+    box-shadow: 0 2px 8px rgba(56,189,248,0.3);
+}
+
+.edit-btn:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(56,189,248,0.4);
+}
+
+.delete-btn {
+    background: linear-gradient(180deg, rgba(239,68,68,0.9), rgba(220,38,38,0.9));
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(239,68,68,0.3);
+}
+.delete-btn:hover {
+    background: linear-gradient(180deg, rgba(239,68,68,1), rgba(185,28,28,1));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239,68,68,0.4);
+}
+
+.btn-sm {
+    height: 28px;
+    padding: 0 10px;
+    font-size: .85rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+}
+
+a.btn,
+.btn,
+a.btn:hover,
+.btn:hover {
+    text-decoration: none !important;
+}
+

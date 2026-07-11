@@ -76,3 +76,41 @@
 .auth-footer a:hover {
     text-decoration: underline;
 }
+
+/* Auth section */
+
+body.light-mode .auth-section {
+    background: transparent;
+}
+
+body.light-mode .auth-card {
+    background: #ffffff;
+    border-color: #e5e7eb;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+body.light-mode .auth-card input[type="text"],
+body.light-mode .auth-card input[type="password"],
+body.light-mode .auth-card input,
+body.light-mode .auth-card select,
+body.light-mode .auth-card textarea {
+    background: #ffffff !important;
+    color: #0f172a;
+    border: 1px solid #d1d5db;
+}
+
+body.light-mode .auth-card input:focus,
+body.light-mode .auth-card textarea:focus {
+    border-color: #38bff8bf;
+    box-shadow: 0 0 0 4px rgba(56,189,248,.20);
+}
+
+body.light-mode .auth-card label {
+    color: #374151;
+}
+
+body.light-mode .help-list li,
+body.light-mode .help,
+body.light-mode .auth-footer {
+    color: #6b7280;
+}

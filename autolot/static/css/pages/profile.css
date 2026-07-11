@@ -74,3 +74,18 @@
     border-radius: 8px;
     color: #e5e7eb;
 }
+
+/* Profile avatar */
+
+body.light-mode .profile-avatar {
+    border-color: var(--c-border);
+    background: var(--c-surface-alt);
+}
+
+body.light-mode .car-photos-grid .photo-item {
+    box-shadow: 0 8px 18px rgba(15,23,42,.06);
+}
+
+body.light-mode .car-photos-grid .photo-item:hover {
+    box-shadow: 0 14px 30px rgba(15,23,42,.08);
+}

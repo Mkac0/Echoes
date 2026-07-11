@@ -96,3 +96,25 @@ body.light-mode .nav-mobile-toggle {
 body.light-mode .nav-mobile-toggle:hover {
     background: rgba(0,0,0,0.06);
 }
+
+/* Header & nav */
+
+body.light-mode .header-logo-container h1 {
+    color: #0f172a;
+}
+
+body.light-mode nav a,
+body.light-mode nav button,
+body.light-mode .navbar-btn a,
+body.light-mode .navbar-btn button {
+    color: #4b5563;
+}
+
+body.light-mode nav a:hover,
+body.light-mode nav button:hover,
+body.light-mode .navbar-btn a:hover,
+body.light-mode .navbar-btn button:hover {
+    color: #0f172a;
+    background: rgba(148,163,184,.14);
+    text-decoration: none;
+}

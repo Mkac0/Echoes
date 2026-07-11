@@ -378,28 +378,6 @@ body.light-mode {
     --c-shadow-strong: 0 10px 25px rgba(15,23,42,.08);
 }
 
-/* Header & nav */
-
-body.light-mode .header-logo-container h1 {
-    color: #0f172a;
-}
-
-body.light-mode nav a,
-body.light-mode nav button,
-body.light-mode .navbar-btn a,
-body.light-mode .navbar-btn button {
-    color: #4b5563;
-}
-
-body.light-mode nav a:hover,
-body.light-mode nav button:hover,
-body.light-mode .navbar-btn a:hover,
-body.light-mode .navbar-btn button:hover {
-    color: #0f172a;
-    background: rgba(148,163,184,.14);
-    text-decoration: none;
-}
-
 /* Generic text */
 
 body.light-mode,
@@ -505,37 +483,6 @@ body.light-mode .xerror {
     border-color: #fecaca;
 }
 
-/* Card links & hover */
-
-body.light-mode .card-link:hover {
-    background: linear-gradient(180deg, rgba(56,189,248,.10), rgba(56,189,248,0) 35%), #ffffff;
-    border-color: #95a5aca7;
-    box-shadow: 0 10px 25px #8ba9b6a4;
-    text-decoration: none;
-}
-
-/* Inventory card image placeholder */
-
-body.light-mode .no-images-placeholder {
-    background: var(--c-bg-input);
-    color: var(--c-text-secondary);
-}
-
-/* Profile avatar */
-
-body.light-mode .profile-avatar {
-    border-color: var(--c-border);
-    background: var(--c-surface-alt);
-}
-
-body.light-mode .car-photos-grid .photo-item {
-    box-shadow: 0 8px 18px rgba(15,23,42,.06);
-}
-
-body.light-mode .car-photos-grid .photo-item:hover {
-    box-shadow: 0 14px 30px rgba(15,23,42,.08);
-}
-
 /* Links */
 
 body.light-mode a {
@@ -544,44 +491,6 @@ body.light-mode a {
 
 body.light-mode a:hover {
     text-decoration: underline;
-}
-
-/* Auth section */
-
-body.light-mode .auth-section {
-    background: transparent;
-}
-
-body.light-mode .auth-card {
-    background: #ffffff;
-    border-color: #e5e7eb;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-}
-
-body.light-mode .auth-card input[type="text"],
-body.light-mode .auth-card input[type="password"],
-body.light-mode .auth-card input,
-body.light-mode .auth-card select,
-body.light-mode .auth-card textarea {
-    background: #ffffff !important;
-    color: #0f172a;
-    border: 1px solid #d1d5db;
-}
-
-body.light-mode .auth-card input:focus,
-body.light-mode .auth-card textarea:focus {
-    border-color: #38bff8bf;
-    box-shadow: 0 0 0 4px rgba(56,189,248,.20);
-}
-
-body.light-mode .auth-card label {
-    color: #374151;
-}
-
-body.light-mode .help-list li,
-body.light-mode .help,
-body.light-mode .auth-footer {
-    color: #6b7280;
 }
 
 body.light-mode header {
@@ -857,8 +766,6 @@ body.light-mode .filters-form {
         max-width: 560px;
     }
 }
-
-/* Apple-style toggle switch */
 
 .switch {
     display: inline-flex;

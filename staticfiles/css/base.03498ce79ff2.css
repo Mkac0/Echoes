@@ -1,7 +1,7 @@
-@import 'components/nav.css';
-@import 'components/footer.css';
-@import 'pages/auth.css';
-@import 'pages/profile.css';
+@import url("components/nav.d41d8cd98f00.css");
+@import url("components/footer.d41d8cd98f00.css");
+@import url("pages/auth.d41d8cd98f00.css");
+@import url("pages/profile.d41d8cd98f00.css");
 
 *{ box-sizing:border-box }
 

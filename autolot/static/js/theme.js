@@ -45,8 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* --------------- INVENTORY IMAGE CAROUSEL --------------- */
-
     function cycleImage(event, direction) {
         event.preventDefault();
         event.stopPropagation();
@@ -104,3 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 })();
+
+document.querySelectorAll('input[type="file"]').forEach(input => {
+    input.addEventListener('change', function() {
+        const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+        this.nextElementSibling.nextElementSibling.textContent = fileName;
+    });
+});

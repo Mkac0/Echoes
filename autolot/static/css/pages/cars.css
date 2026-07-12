@@ -395,3 +395,20 @@ fieldset:first-of-type .form-grid {
     cursor: pointer;
     text-align: center;
 }
+
+.file-input-hidden {
+    display: none;
+}
+
+.custom-file-upload label.btn {
+    cursor: pointer;
+    background: #38bdf8;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.custom-file-upload label.btn:hover {
+    background: #0ea5e9;
+}

@@ -413,3 +413,24 @@ fieldset:first-of-type .form-grid {
 .custom-file-upload label.btn:hover {
     background: #0ea5e9;
 }
+
+.xrow:has(textarea), 
+.xrow:has(input[type="file"]),
+.xrow--checkbox {
+    grid-column: 1 / -1 !important;
+}
+
+.vin-field-class {
+    grid-column: span 2;
+}
+
+@media (min-width: 768px) {
+    .form-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 767px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}

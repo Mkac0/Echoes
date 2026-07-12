@@ -188,6 +188,6 @@ body.light-mode .navbar-btn button:hover {
     }
 
     .navbar-btn.nav-open {
-        display: flex;
+        display: flex !important;
     }
 }

@@ -373,3 +373,15 @@ fieldset:first-of-type .form-grid {
     color: #7dd3fc;
     text-shadow: 0 0 6px rgba(56,189,248,0.5);
 }
+
+.status-available { 
+    color: #22c55e; 
+}
+
+.status-pending { 
+    color: #f59e0b;
+}
+
+.status-sold { 
+    color: #ef4444;
+}

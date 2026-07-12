@@ -130,6 +130,9 @@ class CarCreate(LoginRequiredMixin, CreateView):
         if form.is_valid() and formset.is_valid():
             self.object = form.save(commit=False)
             self.object.owner = self.request.user
+            self.object.make = form.cleaned_data.get('make') or self.object.make
+            self.object.model = form.cleaned_data.get('model') or self.object.model
+            self.object.year = form.cleaned_data.get('year') or self.object.year
             self.object.save()
             formset.instance = self.object
             formset.save()

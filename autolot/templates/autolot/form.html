@@ -29,6 +29,20 @@
             </div>
         {% endif %}
         {% endfor %}
+    </div> <div class="photo-section" style="margin: 20px 0;">
+        <h3>Upload Photos</h3>
+        {{ photo_formset.management_form }}
+        <div class="photo-upload-grid">
+            {% for photo_form in photo_formset %}
+                <div class="photo-form-card">
+                    {{ photo_form.image }}
+                    {{ photo_form.caption }}
+                    {% if photo_form.instance.pk %}
+                        <div class="delete-checkbox">{{ photo_form.DELETE }} Delete</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
     <div class="action-links">
         <button class="btn" type="submit">Save</button>

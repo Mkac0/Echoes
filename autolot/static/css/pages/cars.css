@@ -385,3 +385,13 @@ fieldset:first-of-type .form-grid {
 .status-sold { 
     color: #ef4444;
 }
+
+.btn, .btn-secondary, input[type="file"].btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #38bdf8;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+}

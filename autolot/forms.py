@@ -1,6 +1,7 @@
 from django import forms
+from django.forms import inlineformset_factory
 from django.contrib.auth.models import User as AuthUser
-import requests # Import requests to handle potential API errors
+import requests
 from .models import Profile, Car, CarPhoto, CustomerLead
 from .services import fetch_vehicle_by_vin
 
@@ -41,6 +42,17 @@ class CarForm(forms.ModelForm):
                 self.add_error(field, f'{field.title()} is required.')
                 
         return cleaned
+
+CarPhotoFormSet = inlineformset_factory(
+    Car, 
+    CarPhoto, 
+    fields=('image', 'caption'), 
+    extra=3, 
+    can_delete=True,
+    widgets={
+        'image': forms.ClearableFileInput(attrs={'class': 'btn btn-secondary'}),
+    }
+)
 
 class ProfileForm(forms.ModelForm):
     class Meta:

@@ -116,11 +116,24 @@ class CarCreate(LoginRequiredMixin, CreateView):
     form_class = CarForm
     template_name = 'autolot/form.html'
     success_url = reverse_lazy('car-list')
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['photo_formset'] = CarPhotoFormSet(self.request.POST, self.request.FILES)
+        else:
+            context['photo_formset'] = CarPhotoFormSet()
+        return context
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.owner = self.request.user
-        self.object.save()
-        return redirect(self.get_success_url())
+        context = self.get_context_data()
+        formset = context['photo_formset']
+        if form.is_valid() and formset.is_valid():
+            self.object = form.save(commit=False)
+            self.object.owner = self.request.user
+            self.object.save()
+            formset.instance = self.object
+            formset.save()
+            return redirect(self.get_success_url())
+        return self.render_to_response(self.get_context_data(form=form))
 
 class CarUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Car

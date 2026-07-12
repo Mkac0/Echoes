@@ -10,7 +10,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <input type="hidden" name="next" value="{{ next }}" />
-        <button type="submit" class="btn-primary full-width">Log In</button>
+        <button type="submit" class="btn btn-primary full-width">Log In</button>
         <p class="auth-footer">
             Don't have an account?
             <a href="{% url 'signup' %}">Sign up</a>

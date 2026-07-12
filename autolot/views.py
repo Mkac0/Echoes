@@ -2,7 +2,7 @@ from gc import get_objects
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
 from .models import Car, CustomerLead, CarPhoto
-from .forms import CarForm, CustomerLeadForm, CarPhotoForm
+from .forms import CarForm, CarPhotoFormSet, CustomerLeadForm, CarPhotoForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
@@ -117,12 +117,13 @@ class CarCreate(LoginRequiredMixin, CreateView):
     template_name = 'autolot/form.html'
     success_url = reverse_lazy('car-list')
     def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         if self.request.POST:
             context['photo_formset'] = CarPhotoFormSet(self.request.POST, self.request.FILES)
         else:
             context['photo_formset'] = CarPhotoFormSet()
         return context
+
     def form_valid(self, form):
         context = self.get_context_data()
         formset = context['photo_formset']

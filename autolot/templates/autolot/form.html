@@ -34,9 +34,9 @@
         {{ photo_formset.management_form }}
         <div class="photo-upload-grid">
             {% for photo_form in photo_formset %}
-                <div class="photo-form-card">
+                <div class="photo-form-card" style="border: 1px solid #ccc; padding: 10px; margin: 5px;">
                     {{ photo_form.image }}
-                    {{ photo_form.caption }}
+                    <!-- {{ photo_form.caption }} -->
                     {% if photo_form.instance.pk %}
                         <div class="delete-checkbox">{{ photo_form.DELETE }} Delete</div>
                     {% endif %}

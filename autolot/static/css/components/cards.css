@@ -66,13 +66,14 @@
 }
 
 .card {
-    background:linear-gradient(180deg, rgba(56,189,248,.08), rgba(56,189,248,0) 35%), #111827;
-    border:1px solid #1f2937; 
+    background: linear-gradient(180deg, rgba(56,189,248,.08), rgba(56,189,248,0) 35%), #111827;
+    border: 1px solid #1f2937; 
     width: 100%;
-    max-width: 520px;
-    border-radius: 16px;
-    padding:16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,.35);
+    max-width: 1100px; 
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 .card h3 { 
@@ -84,8 +85,6 @@
     color: #94a3b8; 
     font-size:.95rem 
 }
-
-/* --- Inventory Card Image Styles --- */
 
 .card-image-container {
     position: relative;
@@ -126,8 +125,6 @@
     border-radius: inherit;
 }
 
-/* --- Next Button Styling --- */
-
 .card-next-btn {
     position: absolute;
     top: 50%;
@@ -159,8 +156,6 @@
 .light-mode .card-next-btn:hover {
     background: rgba(255, 255, 255, 1);
 }
-
-/* --- Back Button Styling --- */
 
 .card-back-btn {
     position: absolute;
@@ -194,16 +189,12 @@
     background: rgba(255, 255, 255, 1);
 }
 
-/* Card links & hover */
-
 body.light-mode .card-link:hover {
     background: linear-gradient(180deg, rgba(56,189,248,.10), rgba(56,189,248,0) 35%), #ffffff;
     border-color: #95a5aca7;
     box-shadow: 0 10px 25px #8ba9b6a4;
     text-decoration: none;
 }
-
-/* Inventory card image placeholder */
 
 body.light-mode .no-images-placeholder {
     background: var(--c-bg-input);

@@ -39,12 +39,12 @@
           <ul class="navbar-btn" id="primary-nav">
             {% if user.is_authenticated %}
               <li><a href="{% url 'car-list' %}">Inventory</a></li>
-              <li><a href="{% url 'car-create' %}">Add Car</a></li>
+              <li><a href="{% url 'car-create' %}">New Car</a></li>
               <li><a href="{% url 'profile-detail' %}">Profile</a></li>
               <li>
                 <form id="logout-form" method="post" action="{% url 'logout' %}">
                   {% csrf_token %}
-                  <button type="submit">Log out</button>
+                  <button type="submit">Sign out</button>
                 </form>
               </li>
             {% else %}

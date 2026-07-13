@@ -29,26 +29,25 @@
             </div>
         {% endif %}
         {% endfor %}
-    </div> <div class="photo-section" style="margin: 20px 0;">
-        <h3>Upload Photo</h3>
-        {{ photo_formset.management_form }}
-        <div class="photo-upload-container">
-            {% for photo_form in photo_formset %}
-                <div class="photo-form-card">
-                    <div class="custom-file-upload">
-                        {{ photo_form.image }}
-                        <label for="{{ photo_form.image.id_for_label }}" class="btn btn-secondary">
-                            Select File
-                        </label>
-                        <span class="file-name">No file chosen</span>
-                    </div>
-                    <!-- {{ photo_form.caption }} -->
+    </div>
+    {% if object.pk %}
+        <hr>
+        <h3>Manage Photos</h3>
+        <div class="car-photos-grid">
+            {% for p in object.photos.all %}
+                <div class="photo-item">
+                    <img src="{{ p.image.url }}" style="width:100px;">
+                    <a href="{% url 'carphoto-delete' p.pk %}" class="btn btn-sm btn-delete">Delete</a>
                 </div>
             {% endfor %}
         </div>
-    </div>
+
+        <div class="mt-4">
+            <a href="{% url 'carphoto-create' object.pk %}" class="btn btn-secondary">Add New Photo</a>
+        </div>
+    {% endif %}
     <div class="action-links">
-        <button class="btn" type="submit">Save</button>
+        <button class="btn" type="submit">Save Changes</button>
         <a class="btn" href="{% url 'car-list' %}">Cancel</a>
     </div>
 </form>

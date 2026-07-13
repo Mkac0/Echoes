@@ -50,10 +50,10 @@
                         {% if request.user == object.user %}
                             <p><a href="{% url 'profile-edit' %}" class="btn btn-primary">Edit Profile</a></p>
                         {% endif %}
-                        <form method="post" action="{% url 'carphoto-delete' p.pk %}" onsubmit="return confirm('Delete this photo?');">
+                        <!-- <form method="post" action="{% url 'carphoto-delete' p.pk %}" onsubmit="return confirm('Delete this photo?');">
                             {% csrf_token %}
                             <button class="btn btn-sm btn-delete" type="submit">Delete</button>
-                        </form>
+                        </form> -->
                     </div>
                 {% endif %}
             </figure>

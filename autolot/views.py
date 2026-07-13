@@ -145,8 +145,11 @@ class CarUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "autolot/form.html"
     success_url = reverse_lazy('car-list')
     def test_func(self):
-        car = self.get_object()
-        return car.owner == self.request.user
+        return self.get_object().owner == self.request.user
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['photos'] = self.object.photos.all()
+        return context
 
 class CarDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Car
@@ -228,7 +231,7 @@ class CarPhotoUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class CarPhotoDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = CarPhoto
-    template_name = "autolot/carphoto_confirm_delete.html"
+    template_name = "autolot/car_confirm_delete.html"
     def test_func(self):
         return self.get_object().car.owner == self.request.user
     def delete(self, request, *args, **kwargs):
@@ -239,4 +242,4 @@ class CarPhotoDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             storage.delete(path)
         return response
     def get_success_url(self):
-        return reverse("car-detail", args=[self.object.car_id])
+        return reverse("car-update", args=[self.object.car_id])

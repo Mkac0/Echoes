@@ -31,24 +31,58 @@
         {% endfor %}
     </div>
     {% if object.pk %}
-        <hr>
-        <h3>Manage Photos</h3>
-        <div class="car-photos-grid">
-            {% for p in object.photos.all %}
-                <div class="photo-item">
-                    <img src="{{ p.image.url }}" style="width:100px;">
-                    <a href="{% url 'carphoto-delete' p.pk %}" class="btn btn-sm btn-delete">Delete</a>
+        <section class="photo-manager">
+            <div class="photo-manager__header">
+                <div>
+                    <h3>Manage Photos</h3>
+                    <p class="photo-manager__help">
+                        Add or remove photos for this vehicle.
+                    </p>
                 </div>
-            {% endfor %}
-        </div>
-
-        <div class="mt-4">
-            <a href="{% url 'carphoto-create' object.pk %}" class="btn btn-secondary">Add New Photo</a>
-        </div>
+                <a
+                    href="{% url 'carphoto-create' object.pk %}"
+                    class="btn btn-secondary"
+                >
+                    Add New Photo
+                </a>
+            </div>
+            {% if object.photos.all %}
+                <div class="car-photos-grid">
+                    {% for p in object.photos.all %}
+                        <figure class="photo-item">
+                            <div class="photo-item__image">
+                                <img
+                                    src="{{ p.image.url }}"
+                                    alt="{{ object }} photo {{ forloop.counter }}"
+                                    loading="lazy"
+                                >
+                            </div>
+                            <figcaption class="photo-item__footer">
+                                <span>Photo {{ forloop.counter }}</span>
+                                <a
+                                    href="{% url 'carphoto-delete' p.pk %}"
+                                    class="photo-delete"
+                                >
+                                    Delete
+                                </a>
+                            </figcaption>
+                        </figure>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="photo-empty-state">
+                    No photos have been added yet.
+                </div>
+            {% endif %}
+        </section>
     {% endif %}
     <div class="action-links">
-        <button class="btn" type="submit">Save Changes</button>
-        <a class="btn" href="{% url 'car-list' %}">Cancel</a>
+        <a class="btn btn-cancel" href="{% url 'car-list' %}">
+            Cancel
+        </a>
+        <button class="btn" type="submit">
+            Save Changes
+        </button>
     </div>
 </form>
 

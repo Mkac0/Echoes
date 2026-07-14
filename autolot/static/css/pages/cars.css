@@ -826,6 +826,18 @@ body.light-mode .btn-cancel {
     text-align: right;
 }
 
+.car-info-row strong.status-available {
+    color: #22c55e;
+}
+
+.car-info-row strong.status-pending {
+    color: #f59e0b;
+}
+
+.car-info-row strong.status-sold {
+    color: #ef4444;
+}
+
 .car-info-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;

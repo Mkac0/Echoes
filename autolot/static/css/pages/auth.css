@@ -77,8 +77,6 @@
     text-decoration: underline;
 }
 
-/* Auth section */
-
 body.light-mode .auth-section {
     background: transparent;
 }

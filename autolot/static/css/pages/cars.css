@@ -257,6 +257,12 @@ fieldset:first-of-type .form-grid {
     margin-top: 6px;
 }
 
+.car-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 16px;
+}
+
 .car-photos-grid .photo-item img {
     display: block;
     width: 100%;
@@ -397,29 +403,109 @@ fieldset:first-of-type .form-grid {
 }
 
 .photo-manager {
-    margin-top: 8px;
+    margin-top: 4px;
     padding-top: 28px;
     border-top: 1px solid #1f2937;
 }
 
 .photo-manager__header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 20px;
     margin-bottom: 18px;
 }
 
 .photo-manager__header h3 {
-    margin: 0 0 4px;
-    color: #e5e7eb;
-    font-size: 1.05rem;
+    margin: 0 0 3px;
 }
 
 .photo-manager__help {
     margin: 0;
-    color: #94a3b8;
+    line-height: 1.4;
+}
+
+.photo-manager__add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #22d3ee, #38bdf8);
+    color: #001018;
     font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+        transform 0.16s ease,
+        filter 0.16s ease;
+}
+
+.photo-manager__add:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+    text-decoration: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid #1f2937;
+}
+
+.form-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        transform 0.16s ease,
+        filter 0.16s ease,
+        background 0.16s ease,
+        border-color 0.16s ease;
+}
+
+.form-action-btn:hover {
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.form-action-btn--primary {
+    background: linear-gradient(180deg, #22d3ee, #38bdf8);
+    color: #001018;
+}
+
+.form-action-btn--primary:hover {
+    filter: brightness(1.06);
+}
+
+.form-action-btn--secondary {
+    background: transparent;
+    border-color: #334155;
+    color: #cbd5e1;
+}
+
+.form-action-btn--secondary:hover {
+    background: rgba(148, 163, 184, 0.08);
+    border-color: #475569;
 }
 
 .car-photos-grid {
@@ -471,7 +557,7 @@ fieldset:first-of-type .form-grid {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 10px;
     padding: 10px 12px;
     color: #94a3b8;
     font-size: 0.85rem;
@@ -481,25 +567,23 @@ fieldset:first-of-type .form-grid {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: 72px;
     min-height: 32px;
-    padding: 0 11px;
-    border: 1px solid rgba(248, 113, 113, 0.25);
+    padding: 0 12px;
+    border: 1px solid rgba(248, 113, 113, 0.35);
     border-radius: 8px;
-    background: rgba(239, 68, 68, 0.08);
+    background: rgba(239, 68, 68, 0.1);
     color: #fca5a5;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 600;
+    line-height: 1;
     text-decoration: none;
-    transition:
-        background 0.18s ease,
-        border-color 0.18s ease,
-        color 0.18s ease;
 }
 
 .photo-delete:hover {
-    background: rgba(239, 68, 68, 0.16);
-    border-color: rgba(248, 113, 113, 0.5);
-    color: #fecaca;
+    background: #dc2626;
+    border-color: #ef4444;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -589,6 +673,25 @@ body.light-mode .btn-cancel {
 @media (max-width: 480px) {
     .car-photos-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .photo-manager__header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .photo-manager__add {
+        width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-action-btn {
+        width: 100%;
     }
 }
 
@@ -972,4 +1075,44 @@ body.light-mode .car-info-row {
 
 .delete-btn:hover {
     filter: brightness(1.08);
+}
+
+body.light-mode .form-actions {
+    border-top-color: #e5e7eb;
+}
+
+body.light-mode .form-action-btn--secondary {
+    background: #ffffff;
+    border-color: #d1d5db;
+    color: #334155;
+}
+
+body.light-mode .form-action-btn--secondary:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+}
+
+body.light-mode .photo-delete {
+    background: #fff1f2;
+    border-color: #fecdd3;
+    color: #be123c;
+}
+
+body.light-mode .photo-delete:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #ffffff;
+}
+
+a.btn:hover,
+a.btn-secondary:hover,
+a.photo-delete:hover,
+a.form-action-btn:hover {
+    text-decoration: none !important;
+}
+
+.photo-manager__add,
+.photo-manager__add:hover,
+.photo-manager__add:focus {
+    text-decoration: none !important;
 }

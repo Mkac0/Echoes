@@ -41,7 +41,7 @@
                 </div>
                 <a
                     href="{% url 'carphoto-create' object.pk %}"
-                    class="btn btn-secondary"
+                    class="photo-manager__add"
                 >
                     Add New Photo
                 </a>
@@ -76,11 +76,13 @@
             {% endif %}
         </section>
     {% endif %}
-    <div class="action-links">
-        <a class="btn btn-cancel" href="{% url 'car-list' %}">
+    <div class="form-actions">
+        <a class="form-action-btn form-action-btn--secondary"
+        href="{% url 'car-list' %}">
             Cancel
         </a>
-        <button class="btn" type="submit">
+
+        <button class="form-action-btn form-action-btn--primary" type="submit">
             {% if object.pk %}
                 Save Changes
             {% else %}

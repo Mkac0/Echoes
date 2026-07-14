@@ -47,14 +47,13 @@
     background:rgba(56,189,248,.08);
 }
 
-.btn-delete { 
-    background:transparent; 
-    color: #ef4444; 
-    border-color:rgba(239,68,68,.35);
+.delete-btn {
+    background: linear-gradient(180deg, #ef4444, #dc2626);
+    color: white;
 }
 
-.btn-delete:hover { 
-    background:rgba(239,68,68,.08);
+.delete-btn:hover {
+    filter: brightness(1.08);
 }
 
 button:active, .btn:active { 

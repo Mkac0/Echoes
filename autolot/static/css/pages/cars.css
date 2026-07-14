@@ -608,8 +608,6 @@ body.light-mode .btn-cancel {
     align-items: start;
 }
 
-/* Gallery */
-
 .car-gallery {
     min-width: 0;
 }
@@ -750,8 +748,6 @@ body.light-mode .btn-cancel {
     font-style: italic;
 }
 
-/* Details panel */
-
 .car-info-panel {
     position: sticky;
     top: 100px;
@@ -833,8 +829,8 @@ body.light-mode .btn-cancel {
 .car-info-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 22px;
+    gap: 12px;
+    margin-top: 28px;
 }
 
 .car-info-actions .btn,
@@ -843,15 +839,33 @@ body.light-mode .btn-cancel {
     width: 100%;
 }
 
+.car-info-actions .btn,
+.car-info-actions a,
+.car-info-actions button {
+    width: 100%;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
 .car-info-actions .btn-secondary {
     grid-column: 1 / -1;
 }
 
 .car-info-actions .inline-form {
     display: block;
+    width: 100%;
 }
 
-/* Responsive */
+.car-info-actions .inline-form button {
+    width: 100%;
+}
 
 @media (max-width: 950px) {
     .car-detail-layout {
@@ -937,4 +951,13 @@ body.light-mode .car-info-list {
 
 body.light-mode .car-info-row {
     border-bottom-color: #e2e8f0;
+}
+
+.delete-btn {
+    background: linear-gradient(180deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.delete-btn:hover {
+    filter: brightness(1.08);
 }

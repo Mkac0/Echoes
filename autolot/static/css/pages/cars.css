@@ -554,6 +554,11 @@ body.light-mode .btn-cancel {
     color: #334155;
 }
 
+.car-create-help {
+    margin: 4px 0 0;
+    text-align: right;
+}
+
 @media (max-width: 767px) {
     .form-card {
         padding: 22px 18px;

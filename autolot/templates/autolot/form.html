@@ -81,7 +81,11 @@
             Cancel
         </a>
         <button class="btn" type="submit">
-            Save Changes
+            {% if object.pk %}
+                Save Changes
+            {% else %}
+                Save and Add Photos
+            {% endif %}
         </button>
     </div>
 </form>

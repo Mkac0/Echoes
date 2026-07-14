@@ -116,28 +116,33 @@ class CarCreate(LoginRequiredMixin, CreateView):
     form_class = CarForm
     template_name = 'autolot/form.html'
     success_url = reverse_lazy('car-list')
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.request.POST:
-            context['photo_formset'] = CarPhotoFormSet(self.request.POST, self.request.FILES)
-        else:
-            context['photo_formset'] = CarPhotoFormSet()
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     if self.request.POST:
+    #         context['photo_formset'] = CarPhotoFormSet(self.request.POST, self.request.FILES)
+    #     else:
+    #         context['photo_formset'] = CarPhotoFormSet()
+    #     return context
 
     def form_valid(self, form):
-        context = self.get_context_data()
-        formset = context['photo_formset']
-        if form.is_valid() and formset.is_valid():
-            self.object = form.save(commit=False)
-            self.object.owner = self.request.user
-            self.object.make = form.cleaned_data.get('make') or self.object.make
-            self.object.model = form.cleaned_data.get('model') or self.object.model
-            self.object.year = form.cleaned_data.get('year') or self.object.year
-            self.object.save()
-            formset.instance = self.object
-            formset.save()
-            return redirect(self.get_success_url())
-        return self.render_to_response(self.get_context_data(form=form))
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("car-update", kwargs={"pk": self.object.pk})
+        # context = self.get_context_data()
+        # formset = context['photo_formset']
+        # if form.is_valid() and formset.is_valid():
+        #     self.object = form.save(commit=False)
+        #     self.object.owner = self.request.user
+        #     self.object.make = form.cleaned_data.get('make') or self.object.make
+        #     self.object.model = form.cleaned_data.get('model') or self.object.model
+        #     self.object.year = form.cleaned_data.get('year') or self.object.year
+        #     self.object.save()
+        #     formset.instance = self.object
+        #     formset.save()
+        #     return redirect(self.get_success_url())
+        # return self.render_to_response(self.get_context_data(form=form))
 
 class CarUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Car
@@ -196,7 +201,7 @@ class CarPhotoCreate(CreateView):
                 filename = (u.split('/')[-1].split('?')[0]) or f"{car.vin}.jpg"
                 photo = CarPhoto(car=car)
                 photo.image.save(filename, ContentFile(resp.content), save=True)
-                messages.success(request)
+                messages.success(request, "Photo imported successfully.")
             except requests.exceptions.RequestException as error:
                 messages.error(request, f"{error}")
             return redirect('car-detail', pk=self.kwargs['pk'])

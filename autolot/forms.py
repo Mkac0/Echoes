@@ -47,7 +47,7 @@ CarPhotoFormSet = inlineformset_factory(
     Car, 
     CarPhoto, 
     fields=('image', 'caption'), 
-    extra=1, 
+    extra=3, 
     can_delete=True,
     widgets={
         'image': forms.ClearableFileInput(attrs={'class': 'file-input-hidden'}),

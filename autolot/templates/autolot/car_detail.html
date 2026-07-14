@@ -3,67 +3,206 @@
 {% block content %}
 
 <div class="car-detail-container">
-    <div class="car-header">
-        <h2>{{ object.year }} {{ object.make }} {{ object.model }}</h2>
-        <p class="vin">VIN: <strong>{{ object.vin }}</strong></p>
-        {% if object.owner and object.owner.profile %}
-            <p class="car-owner">
-                Owner:
-                <a class="profile-link" href="{% url 'profile-public' object.owner_id %}">
-                    {{ object.owner.get_username }}
-                </a>
-            </p>
-        {% endif %}
-    </div>
-    <div class="car-meta">
-        <div class="meta-item"><span>Mileage:</span> {{ object.mileage|default:"N/A" }}</div>
-        <div class="meta-item"><span>Price:</span> ${{ object.price|floatformat:2|intcomma|default:"0.00" }}</div>
-        <div class="meta-item"><span>Cash Down:</span> ${{ object.cash_down|floatformat:2|intcomma|default:"0.00" }}</div>
-        <div class="meta-item"><span>Condition:</span> {{ object.condition|default:"Used" }}</div>
-        <div class="meta-item">
-            <span>Status:</span> 
-            <span class="status status-{{ object.status }}">{{ object.get_status_display }}</span>
-        </div>
-    </div>
-    <hr class="divider"/>
-    <h3>Photos ({{ object.photos.count }})</h3>
-    <div class="car-photos-grid">
-        {% for p in object.photos.all %}
-            <figure class="photo-item">
-                <img src="{{ p.image.url }}" alt="{{ p.caption|default:object.make }}">
-                {% if p.caption %}<figcaption>{{ p.caption }}</figcaption>{% endif %}
-                {% if request.user.is_authenticated and request.user == object.owner %}
-                    <div class="photo-actions">
-                        {% if request.user == object.user %}
-                            <p><a href="{% url 'profile-edit' %}" class="btn btn-primary">Edit Profile</a></p>
+    <div class="car-detail-layout">
+        <section class="car-gallery">
+            {% with photos=object.photos.all %}
+                {% if photos %}
+                    <div class="car-gallery__main">
+                        {% for p in photos %}
+                            <img
+                                src="{{ p.image.url }}"
+                                alt="{{ p.caption|default:object.make }}"
+                                class="car-gallery__image{% if forloop.first %} is-active{% endif %}"
+                                data-gallery-image
+                            >
+                        {% endfor %}
+                        {% if object.photos.count > 1 %}
+                            <button
+                                type="button"
+                                class="gallery-arrow gallery-arrow--previous"
+                                aria-label="Previous photo"
+                                data-gallery-previous
+                            >
+                                &#10094;
+                            </button>
+                            <button
+                                type="button"
+                                class="gallery-arrow gallery-arrow--next"
+                                aria-label="Next photo"
+                                data-gallery-next
+                            >
+                                &#10095;
+                            </button>
                         {% endif %}
+                        <div class="gallery-counter">
+                            <span data-gallery-current>1</span>
+                            /
+                            <span>{{ object.photos.count }}</span>
+                        </div>
+                    </div>
+                    {% if object.photos.count > 1 %}
+                        <div class="car-gallery__thumbnails">
+                            {% for p in photos %}
+                                <button
+                                    type="button"
+                                    class="gallery-thumbnail{% if forloop.first %} is-active{% endif %}"
+                                    data-gallery-thumbnail="{{ forloop.counter0 }}"
+                                    aria-label="View photo {{ forloop.counter }}"
+                                >
+                                    <img
+                                        src="{{ p.image.url }}"
+                                        alt="{{ p.caption|default:object.make }}"
+                                    >
+                                </button>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="car-gallery__empty">
+                        No vehicle photos available
                     </div>
                 {% endif %}
-            </figure>
-        {% empty %}
-            <p class="meta">No photos uploaded yet.</p>
-        {% endfor %}
+            {% endwith %}
+        </section>
+        <aside class="car-info-panel">
+            <div class="car-header">
+                <h1>{{ object.year }} {{ object.make }} {{ object.model }}</h1>
+                {% if object.trim %}
+                    <p class="car-trim">{{ object.trim }}</p>
+                {% endif %}
+                <p class="vin">
+                    VIN: <strong>{{ object.vin }}</strong>
+                </p>
+                {% if object.owner %}
+                    <p class="car-owner">
+                        Owner:
+                        <a
+                            class="profile-link"
+                            href="{% url 'profile-public' object.owner_id %}"
+                        >
+                            {{ object.owner.get_username }}
+                        </a>
+                    </p>
+                {% endif %}
+            </div>
+            <div class="car-price">
+                ${{ object.price|floatformat:2|intcomma|default:"0.00" }}
+            </div>
+            <div class="car-info-list">
+                <div class="car-info-row">
+                    <span>Mileage</span>
+                    <strong>{{ object.mileage|intcomma|default:"N/A" }}</strong>
+                </div>
+                <div class="car-info-row">
+                    <span>Cash down</span>
+                    <strong>
+                        ${{ object.cash_down|floatformat:2|intcomma|default:"0.00" }}
+                    </strong>
+                </div>
+                <div class="car-info-row">
+                    <span>Condition</span>
+                    <strong>{{ object.condition|default:"Used" }}</strong>
+                </div>
+                <div class="car-info-row">
+                    <span>Status</span>
+                    <strong class="status status-{{ object.status }}">
+                        {{ object.get_status_display }}
+                    </strong>
+                </div>
+            </div>
+            {% if request.user.is_authenticated %}
+                {% if request.user == object.owner or request.user.is_lead %}
+                    <div class="car-info-actions">
+                        <a
+                            href="{% url 'carphoto-create' object.pk %}"
+                            class="btn btn-secondary"
+                        >
+                            Add Photos
+                        </a>
+
+                        <a
+                            href="{% url 'car-update' object.pk %}"
+                            class="btn edit-btn"
+                        >
+                            Edit
+                        </a>
+                        <form
+                            action="{% url 'car-delete' object.pk %}"
+                            method="post"
+                            class="inline-form"
+                        >
+                            {% csrf_token %}
+                            <button
+                                type="submit"
+                                class="btn delete-btn"
+                                onclick="return confirm('Delete this car?');"
+                            >
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </aside>
     </div>
-    {% if request.user.is_authenticated %}
-        {% if request.user == object.owner or request.user.is_lead %}
-            <div class="mt-4">
-                <a href="{% url 'carphoto-create' object.pk %}" class="btn btn-secondary">Add Photos</a>
-            </div>
-        {% endif %}
-    {% endif %}
-    {% if request.user.is_authenticated %}
-        {% if request.user == object.owner or request.user.is_lead %}
-            <div class="action-links">
-                <a href="{% url 'car-update' object.pk %}" class="btn edit-btn">Edit</a>
-                <form action="{% url 'car-delete' object.pk %}" method="post" class="inline-form">
-                    {% csrf_token %}
-                    <button type="submit" class="btn delete-btn" onclick="return confirm('Delete this car?');">
-                    Delete
-                    </button>
-                </form>
-            </div>
-        {% endif %}
-    {% endif %}
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const images = Array.from(
+        document.querySelectorAll("[data-gallery-image]")
+    );
+    const thumbnails = Array.from(
+        document.querySelectorAll("[data-gallery-thumbnail]")
+    );
+    const previousButton = document.querySelector("[data-gallery-previous]");
+    const nextButton = document.querySelector("[data-gallery-next]");
+    const currentCounter = document.querySelector("[data-gallery-current]");
+    if (!images.length) {
+        return;
+    }
+    let currentIndex = 0;
+    function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+
+        images.forEach(function (image, imageIndex) {
+            image.classList.toggle("is-active", imageIndex === currentIndex);
+        });
+        thumbnails.forEach(function (thumbnail, thumbnailIndex) {
+            thumbnail.classList.toggle(
+                "is-active",
+                thumbnailIndex === currentIndex
+            );
+        });
+        if (currentCounter) {
+            currentCounter.textContent = currentIndex + 1;
+        }
+    }
+    if (previousButton) {
+        previousButton.addEventListener("click", function () {
+            showImage(currentIndex - 1);
+        });
+    }
+    if (nextButton) {
+        nextButton.addEventListener("click", function () {
+            showImage(currentIndex + 1);
+        });
+    }
+    thumbnails.forEach(function (thumbnail) {
+        thumbnail.addEventListener("click", function () {
+            showImage(Number(thumbnail.dataset.galleryThumbnail));
+        });
+    });
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowLeft") {
+            showImage(currentIndex - 1);
+        }
+
+        if (event.key === "ArrowRight") {
+            showImage(currentIndex + 1);
+        }
+    });
+});
+</script>
 
 {% endblock %}

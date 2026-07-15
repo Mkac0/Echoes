@@ -75,8 +75,6 @@
     color: #e5e7eb;
 }
 
-/* Profile avatar */
-
 body.light-mode .profile-avatar {
     border-color: var(--c-border);
     background: var(--c-surface-alt);
@@ -88,4 +86,17 @@ body.light-mode .car-photos-grid .photo-item {
 
 body.light-mode .car-photos-grid .photo-item:hover {
     box-shadow: 0 14px 30px rgba(15,23,42,.08);
+}
+
+.edit-btn {
+    background: #3b82f6;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.edit-btn:hover {
+    filter: brightness(1.08);
 }
